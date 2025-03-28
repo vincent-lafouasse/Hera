@@ -15,11 +15,11 @@ void MainComponent::prepareToPlay(int samplesPerBlockExpected,
     message << "Preparing to play audio...\n";
     message << " samplesPerBlockExpected = " << samplesPerBlockExpected << "\n";
     message << " sampleRate = " << sampleRate;
-    juce::Logger::getCurrentLogger()->writeToLog(message);
+    juce::Logger::writeToLog(message);
 }
 
 void MainComponent::releaseResources() {
-    juce::Logger::getCurrentLogger()->writeToLog("Releasing audio resources");
+    juce::Logger::writeToLog("Releasing audio resources");
 }
 
 void MainComponent::getNextAudioBlock(
