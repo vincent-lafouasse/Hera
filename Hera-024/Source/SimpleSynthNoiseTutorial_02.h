@@ -44,40 +44,35 @@
 
 *******************************************************************************/
 
-
 #pragma once
 
 //==============================================================================
-class MainContentComponent   : public juce::AudioAppComponent
-{
-public:
-    MainContentComponent()
-    {
-        levelSlider.setRange (0.0, 0.25);
-        levelSlider.setTextBoxStyle (juce::Slider::TextBoxRight, false, 100, 20);
-        levelLabel.setText ("Noise Level", juce::dontSendNotification);
+class MainContentComponent : public juce::AudioAppComponent {
+   public:
+    MainContentComponent() {
+        levelSlider.setRange(0.0, 0.25);
+        levelSlider.setTextBoxStyle(juce::Slider::TextBoxRight, false, 100, 20);
+        levelLabel.setText("Noise Level", juce::dontSendNotification);
 
-        addAndMakeVisible (&levelSlider);
-        addAndMakeVisible (&levelLabel);
+        addAndMakeVisible(&levelSlider);
+        addAndMakeVisible(&levelLabel);
 
-        setSize (800, 100);
-        setAudioChannels (0, 2);
+        setSize(800, 100);
+        setAudioChannels(0, 2);
     }
 
-    ~MainContentComponent() override
-    {
-        shutdownAudio();
-    }
+    ~MainContentComponent() override { shutdownAudio(); }
 
-    void prepareToPlay (int, double) override {}
+    void prepareToPlay(int, double) override {}
 
-    void getNextAudioBlock (const juce::AudioSourceChannelInfo& bufferToFill) override
-    {
-        auto level = (float) levelSlider.getValue();
+    void getNextAudioBlock(
+        const juce::AudioSourceChannelInfo& bufferToFill) override {
+        auto level = (float)levelSlider.getValue();
 
-        for (auto channel = 0; channel < bufferToFill.buffer->getNumChannels(); ++channel)
-        {
-            auto* buffer = bufferToFill.buffer->getWritePointer (channel, bufferToFill.startSample);
+        for (auto channel = 0; channel < bufferToFill.buffer->getNumChannels();
+             ++channel) {
+            auto* buffer = bufferToFill.buffer->getWritePointer(
+                channel, bufferToFill.startSample);
 
             for (auto sample = 0; sample < bufferToFill.numSamples; ++sample)
                 *buffer++ = random.nextFloat() * level;
@@ -86,16 +81,15 @@ public:
 
     void releaseResources() override {}
 
-    void resized() override
-    {
-        levelLabel .setBounds (10, 10, 90, 20);
-        levelSlider.setBounds (100, 10, getWidth() - 110, 20);
+    void resized() override {
+        levelLabel.setBounds(10, 10, 90, 20);
+        levelSlider.setBounds(100, 10, getWidth() - 110, 20);
     }
 
-private:
+   private:
     juce::Random random;
     juce::Slider levelSlider;
     juce::Label levelLabel;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainContentComponent)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainContentComponent)
 };
