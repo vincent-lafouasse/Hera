@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(Hera-024 VERSION 0.0.1)
+project(Hera VERSION 0.0.1)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -41,4 +41,4 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 #CMake/Findjuce.cmake, where you can see how JUCE is brought in/configured
 find_package(juce REQUIRED)
 
-add_subdirectory(Hera-024)
+add_subdirectory(Hera)

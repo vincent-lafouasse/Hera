@@ -1,6 +1,6 @@
-set (TargetName Hera-024)
+set (TargetName Hera)
 
-juce_add_gui_app(${TargetName} PRODUCT_NAME "Hera 024")
+juce_add_gui_app(${TargetName} PRODUCT_NAME "Hera")
 juce_generate_juce_header(${TargetName})
 
 target_sources(${TargetName} PRIVATE
