@@ -2,7 +2,7 @@
 
 #include "JuceHeader.h"
 
-class MainComponent : public juce::AudioAppComponent {
+class MainComponent : public juce::AudioAppComponent, public juce::Slider::Listener {
    public:
     MainComponent();
     ~MainComponent() override;
@@ -11,6 +11,8 @@ class MainComponent : public juce::AudioAppComponent {
     void releaseResources() override;
     void getNextAudioBlock(
         const juce::AudioSourceChannelInfo& bufferToFill) override;
+
+    void sliderValueChanged(juce::Slider* slider) override;
 
    private:
     juce::Random random;

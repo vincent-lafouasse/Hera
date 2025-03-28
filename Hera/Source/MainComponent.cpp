@@ -5,6 +5,11 @@ MainComponent::MainComponent()
                     Slider::TextEntryBoxPosition::TextBoxAbove) {
     setSize(800, 600);
     setAudioChannels(0, 2);  // no inputs, two outputs
+
+    addAndMakeVisible(volume_knob);
+    volume_knob.setRange(0.0, 1.0);
+    volume_knob.setValue(0.5);
+    volume_knob.addListener(this);
 }
 
 MainComponent::~MainComponent() {
@@ -42,3 +47,10 @@ void MainComponent::getNextAudioBlock(
         }
     }
 }
+
+void MainComponent::sliderValueChanged(juce::Slider* slider) {
+    if (slider == &volume_knob) {
+        volume_knob.setValue(slider->getValue());
+    }
+}
+
