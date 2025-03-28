@@ -3,7 +3,7 @@
 MainComponent::MainComponent()
     : volume_knob(Slider::SliderStyle::RotaryHorizontalVerticalDrag,
                   Slider::TextEntryBoxPosition::TextBoxAbove) {
-    setSize(800, 600);
+    setSize(400, 300);
     setAudioChannels(0, 2);  // no inputs, two outputs
 
     addAndMakeVisible(volume_knob);
@@ -55,6 +55,5 @@ void MainComponent::sliderValueChanged(juce::Slider* slider) {
 }
 
 void MainComponent::resized() {
-    auto sliderLeft = 120;
-    volume_knob.setBounds(sliderLeft, 20, getWidth() - sliderLeft - 10, 20);
+    volume_knob.setBounds(0, 0, 100, 100);
 }
