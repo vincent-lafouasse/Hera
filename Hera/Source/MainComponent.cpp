@@ -11,6 +11,7 @@ MainComponent::~MainComponent() {
 
 void MainComponent::prepareToPlay(int samplesPerBlockExpected,
                                   double sampleRate) {
+    // we dont allocate anything so let's just log some info
     juce::String message;
     message << "Preparing to play audio...\n";
     message << " samplesPerBlockExpected = " << samplesPerBlockExpected << "\n";
@@ -19,6 +20,7 @@ void MainComponent::prepareToPlay(int samplesPerBlockExpected,
 }
 
 void MainComponent::releaseResources() {
+    // there's nothing to release so let's just say goodbye
     juce::Logger::writeToLog("Releasing audio resources");
 }
 
