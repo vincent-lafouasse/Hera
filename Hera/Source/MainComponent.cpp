@@ -1,7 +1,7 @@
 #include "MainComponent.hpp"
 
 MainComponent::MainComponent()
-    : volume_slider(Slider::SliderStyle::RotaryHorizontalVerticalDrag,
+    : volume_knob(Slider::SliderStyle::RotaryHorizontalVerticalDrag,
                     Slider::TextEntryBoxPosition::TextBoxAbove) {
     setSize(800, 600);
     setAudioChannels(0, 2);  // no inputs, two outputs
