@@ -18,8 +18,7 @@ class Application : public juce::JUCEApplication {
     const juce::String getApplicationVersion() override { return "0.0.1"; }
 
     void initialise(const juce::String&) override {
-        mainWindow.reset(
-            new MainWindow("Hera", new MainContentComponent, *this));
+        mainWindow.reset(new MainWindow("Hera", new MainComponent, *this));
     }
 
     void shutdown() override { mainWindow = nullptr; }

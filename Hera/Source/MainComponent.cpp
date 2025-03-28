@@ -1,16 +1,16 @@
 #include "MainComponent.hpp"
 
-MainContentComponent::MainContentComponent() {
+MainComponent::MainComponent() {
     setSize(800, 600);
     setAudioChannels(0, 2);  // no inputs, two outputs
 }
 
-MainContentComponent::~MainContentComponent() {
+MainComponent::~MainComponent() {
     shutdownAudio();
 }
 
-void MainContentComponent::prepareToPlay(int samplesPerBlockExpected,
-                                         double sampleRate) {
+void MainComponent::prepareToPlay(int samplesPerBlockExpected,
+                                  double sampleRate) {
     juce::String message;
     message << "Preparing to play audio...\n";
     message << " samplesPerBlockExpected = " << samplesPerBlockExpected << "\n";
@@ -18,11 +18,11 @@ void MainContentComponent::prepareToPlay(int samplesPerBlockExpected,
     juce::Logger::getCurrentLogger()->writeToLog(message);
 }
 
-void MainContentComponent::releaseResources() {
+void MainComponent::releaseResources() {
     juce::Logger::getCurrentLogger()->writeToLog("Releasing audio resources");
 }
 
-void MainContentComponent::getNextAudioBlock(
+void MainComponent::getNextAudioBlock(
     const juce::AudioSourceChannelInfo& bufferToFill) {
     for (auto channel = 0; channel < bufferToFill.buffer->getNumChannels();
          ++channel) {
