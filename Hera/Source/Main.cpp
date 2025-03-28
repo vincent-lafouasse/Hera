@@ -14,10 +14,8 @@ class Application : public juce::JUCEApplication {
     //==============================================================================
     Application() = default;
 
-    const juce::String getApplicationName() override {
-        return "SimpleSynthNoiseTutorial";
-    }
-    const juce::String getApplicationVersion() override { return "1.0.0"; }
+    const juce::String getApplicationName() override { return "Hera"; }
+    const juce::String getApplicationVersion() override { return "0.0.1"; }
 
     void initialise(const juce::String&) override {
         mainWindow.reset(new MainWindow("SimpleSynthNoiseTutorial",
