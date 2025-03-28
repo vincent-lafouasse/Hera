@@ -7,8 +7,7 @@ class MainContentComponent : public juce::AudioAppComponent {
     MainContentComponent();
     ~MainContentComponent() override;
 
-    void prepareToPlay(int samplesPerBlockExpected,
-                       double sampleRate) override;
+    void prepareToPlay(int samplesPerBlockExpected, double sampleRate) override;
     void releaseResources() override;
     void getNextAudioBlock(
         const juce::AudioSourceChannelInfo& bufferToFill) override;
