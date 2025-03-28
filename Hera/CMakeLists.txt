@@ -5,6 +5,7 @@ juce_generate_juce_header(${TargetName})
 
 target_sources(${TargetName} PRIVATE
         Source/Main.cpp
+        Source/MainComponent.cpp
         Source/MainComponent.hpp
 )
 
