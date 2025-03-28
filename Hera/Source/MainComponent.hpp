@@ -14,6 +14,7 @@ class MainComponent : public juce::AudioAppComponent {
 
    private:
     juce::Random random;
+    juce::Slider volume_slider;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };
