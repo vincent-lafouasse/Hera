@@ -5,9 +5,7 @@ juce_generate_juce_header(${TargetName})
 
 target_sources(${TargetName} PRIVATE
         Source/Main.cpp
-        Source/SimpleSynthNoiseTutorial_01.h
-        Source/SimpleSynthNoiseTutorial_02.h
-        Source/SimpleSynthNoiseTutorial_03.h
+        Source/MainComponent.hpp
 )
 
 target_compile_definitions(${TargetName} PRIVATE

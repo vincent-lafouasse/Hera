@@ -7,7 +7,7 @@
 */
 
 #include <JuceHeader.h>
-#include "SimpleSynthNoiseTutorial_01.h"
+#include "MainComponent.hpp"
 
 class Application : public juce::JUCEApplication {
    public:
