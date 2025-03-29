@@ -24,7 +24,7 @@ class MainComponent final : public juce::AudioAppComponent,
     void set_frequency(double freq);
 
    private:
-    void advance_phase(int channel);
+    void advance_phase(std::size_t channel);
 
     double frequency;
     std::array<double, 2> oscillator_phase{};

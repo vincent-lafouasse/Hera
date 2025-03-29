@@ -42,17 +42,19 @@ void MainComponent::getNextAudioBlock(
     const juce::AudioSourceChannelInfo& bufferToFill) {
     this->volume_smoother.setTarget(this->volume.load());
 
-    for (auto channel = 0; channel < bufferToFill.buffer->getNumChannels();
+    for (size_t channel = 0;
+         channel < static_cast<size_t>(bufferToFill.buffer->getNumChannels());
          ++channel) {
         auto* buffer = bufferToFill.buffer->getWritePointer(
-            channel, bufferToFill.startSample);
+            static_cast<int>(channel), bufferToFill.startSample);
 
-        for (auto sample = 0; sample < bufferToFill.numSamples; ++sample) {
-            const float sine = std::sin(this->oscillator_phase[channel]);
+        for (size_t sample = 0;
+             sample < static_cast<size_t>(bufferToFill.numSamples); ++sample) {
+            const double sine = std::sin(this->oscillator_phase[channel]);
             this->advance_phase(channel);
 
-            const float sample_volume = volume_smoother.get(channel);
-            buffer[sample] = sample_volume * sine;
+            const double sample_volume = volume_smoother.get(channel);
+            buffer[sample] = static_cast<float>(sample_volume * sine);
         }
     }
 }
@@ -66,7 +68,7 @@ void MainComponent::set_frequency(double f) {
         juce::MathConstants<double>::twoPi * f / sample_rate;
 }
 
-void MainComponent::advance_phase(int channel) {
+void MainComponent::advance_phase(std::size_t channel) {
     this->oscillator_phase[channel] += this->oscillator_phase_increment;
     if (this->oscillator_phase[channel] >= juce::MathConstants<double>::twoPi) {
         this->oscillator_phase[channel] -= juce::MathConstants<double>::twoPi;

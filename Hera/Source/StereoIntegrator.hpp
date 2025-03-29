@@ -22,10 +22,6 @@ class StereoIntegrator {
         return memory_[channel];
     }
 
-    FloatType get(int channel) {
-        return this->get(static_cast<std::size_t>(channel));
-    }
-
    private:
     FloatType target_;
     FloatType inertia_weight_;
