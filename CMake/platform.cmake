@@ -25,3 +25,7 @@ endif ()
 
 #static linking in Windows
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
+if (MSVC)
+    set(CMAKE_CXX_FLAGS "/W4 /WX")
+endif()
