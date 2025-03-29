@@ -1,7 +1,8 @@
 #include "MainComponent.hpp"
 
 MainComponent::MainComponent()
-    : volume_knob(Slider::SliderStyle::RotaryHorizontalVerticalDrag,
+    : volume(0.5),
+      volume_knob(Slider::SliderStyle::RotaryHorizontalVerticalDrag,
                   Slider::TextEntryBoxPosition::TextBoxAbove) {
     setSize(400, 300);
     setAudioChannels(0, 2);  // no inputs, two outputs
@@ -33,24 +34,24 @@ void MainComponent::releaseResources() {
 
 void MainComponent::getNextAudioBlock(
     const juce::AudioSourceChannelInfo& bufferToFill) {
-    const auto volume = static_cast<float>(volume_knob.getValue());
+    const auto buffer_volume = this->volume.load();
 
     for (auto channel = 0; channel < bufferToFill.buffer->getNumChannels();
          ++channel) {
         auto* buffer = bufferToFill.buffer->getWritePointer(
             channel, bufferToFill.startSample);
 
-        constexpr float noise_volume = 0.1f;
         for (auto sample = 0; sample < bufferToFill.numSamples; ++sample) {
+            constexpr float noise_volume = 0.1f;
             auto noise = noise_volume * (2 * random.nextFloat() + 1);
-            buffer[sample] = volume * noise;
+            buffer[sample] = buffer_volume * noise;
         }
     }
 }
 
 void MainComponent::sliderValueChanged(juce::Slider* slider) {
     if (slider == &volume_knob) {
-        volume_knob.setValue(slider->getValue());
+        volume.store(static_cast<float>(slider->getValue()));
     }
 }
 
