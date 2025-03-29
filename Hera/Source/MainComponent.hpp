@@ -2,7 +2,7 @@
 
 #include "JuceHeader.h"
 
-class MainComponent : public juce::AudioAppComponent,
+class MainComponent final : public juce::AudioAppComponent,
                       public juce::Slider::Listener {
    public:
     MainComponent();

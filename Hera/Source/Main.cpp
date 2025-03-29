@@ -9,7 +9,7 @@
 #include <JuceHeader.h>
 #include "MainComponent.hpp"
 
-class Application : public juce::JUCEApplication {
+class Application final : public juce::JUCEApplication {
    public:
     //==============================================================================
     Application() = default;
