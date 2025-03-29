@@ -13,8 +13,8 @@ include(cmake/platform.cmake)
 
 CPMAddPackage(
     NAME JUCE
-    GIT_TAG 8.0.2
-    VERSION 8.0.2
+    GIT_TAG 8.0.6
+    VERSION 8.0.6
     GITHUB_REPOSITORY juce-framework/JUCE
     SOURCE_DIR ${LIB_DIR}/juce
 )
