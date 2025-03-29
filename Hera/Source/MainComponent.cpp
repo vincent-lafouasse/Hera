@@ -63,15 +63,13 @@ void MainComponent::getNextAudioBlock(
 void MainComponent::set_frequency(double f) {
     this->frequency = f;
     this->oscillator_phase_increment =
-        2.0 * juce::MathConstants<double>::pi * f / sample_rate;
+        juce::MathConstants<double>::twoPi * f / sample_rate;
 }
 
 void MainComponent::advance_phase(int channel) {
     this->oscillator_phase[channel] += this->oscillator_phase_increment;
-    if (this->oscillator_phase[channel] >=
-        2.0 * juce::MathConstants<double>::pi) {
-        this->oscillator_phase[channel] -=
-            2.0 * juce::MathConstants<double>::pi;
+    if (this->oscillator_phase[channel] >= juce::MathConstants<double>::twoPi) {
+        this->oscillator_phase[channel] -= juce::MathConstants<double>::twoPi;
     }
 }
 
