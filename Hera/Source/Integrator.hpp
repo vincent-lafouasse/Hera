@@ -23,10 +23,10 @@ class Integrator {
     }
 
    private:
-    FloatType target_;
+    FloatType target_{};
     FloatType inertia_weight_;
     FloatType forward_weight_;
-    std::array<FloatType, nChannels> memory_;
+    std::array<FloatType, nChannels> memory_{};
 };
 
 #endif  // INTEGRATOR_HPP
