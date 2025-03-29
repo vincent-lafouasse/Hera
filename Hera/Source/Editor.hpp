@@ -4,7 +4,7 @@
 
 //==============================================================================
 
-class VolumeKnob : public juce::Slider {
+class VolumeKnob final : public juce::Slider {
    public:
     juce::String getTextFromValue(double value) override;
 };
@@ -12,8 +12,8 @@ class VolumeKnob : public juce::Slider {
 //==============================================================================
 /**
  */
-class HeraEditor : public juce::AudioProcessorEditor,
-                   public juce::Slider::Listener {
+class HeraEditor final : public juce::AudioProcessorEditor,
+                         public juce::Slider::Listener {
    public:
     explicit HeraEditor(HeraProcessor&);
     ~HeraEditor() override;

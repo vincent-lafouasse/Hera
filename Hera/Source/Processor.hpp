@@ -6,10 +6,10 @@
 //==============================================================================
 /**
  */
-class HeraProcessor : public juce::AudioProcessor
+class HeraProcessor final : public juce::AudioProcessor
 #if JucePlugin_Enable_ARA
     ,
-                      public juce::AudioProcessorARAExtension
+                            public juce::AudioProcessorARAExtension
 #endif
 {
    public:
