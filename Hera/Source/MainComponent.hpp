@@ -20,6 +20,10 @@ class MainComponent final : public juce::AudioAppComponent,
     void sliderValueChanged(juce::Slider* slider) override;
 
    private:
+    double oscillator_phase{};
+    double oscillator_phase_increment{};
+    double sample_rate{};
+
     std::atomic<float> volume;
     juce::Slider volume_knob;
     StereoIntegrator<float> volume_smoother;
