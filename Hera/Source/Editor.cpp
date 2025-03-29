@@ -17,8 +17,9 @@ HeraEditor::HeraEditor(HeraProcessor& p)
         juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     constexpr int value_textbox_width = 100;
     constexpr int value_textbox_height = 25;
-    volume_knob.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxBelow,
-                               true, value_textbox_width, value_textbox_height);
+    volume_knob.setTextBoxStyle(
+        juce::Slider::TextEntryBoxPosition::TextBoxBelow, true,
+        value_textbox_width, value_textbox_height);
 
     volume_knob.setRange(0.0, 1.0);
     volume_knob.setValue(0.5);
@@ -54,7 +55,6 @@ void HeraEditor::resized() {
 
 void HeraEditor::sliderValueChanged(juce::Slider* slider) {
     if (slider == &volume_knob) {
-        audioProcessor.volume.store(
-            static_cast<float>(volume_knob.getValue()));
+        audioProcessor.volume.store(static_cast<float>(volume_knob.getValue()));
     }
 }
