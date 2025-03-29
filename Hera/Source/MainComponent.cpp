@@ -1,7 +1,8 @@
 #include "MainComponent.hpp"
 
 MainComponent::MainComponent()
-    : volume(0.5),
+    : frequency(440.0),
+      volume(0.5),
       volume_knob(Slider::SliderStyle::RotaryHorizontalVerticalDrag,
                   Slider::TextEntryBoxPosition::TextBoxAbove),
       volume_smoother(0.9f, 0.1f) {
@@ -26,6 +27,10 @@ void MainComponent::prepareToPlay(int samplesPerBlockExpected,
     message << " samplesPerBlockExpected = " << samplesPerBlockExpected << "\n";
     message << " sampleRate = " << sampleRate;
     juce::Logger::writeToLog(message);
+
+    // store sample rate for phase calculations
+    this->sample_rate = sampleRate;
+    this->set_frequency(220.0f);
 }
 
 void MainComponent::releaseResources() {
@@ -43,12 +48,30 @@ void MainComponent::getNextAudioBlock(
             channel, bufferToFill.startSample);
 
         for (auto sample = 0; sample < bufferToFill.numSamples; ++sample) {
-            constexpr float noise_volume = 0.1f;
-            auto noise = noise_volume * (2 * random.nextFloat() + 1);
+            const float sine = std::sin(this->oscillator_phase[channel]);
+            this->advance_phase(channel);
 
             const float sample_volume = volume_smoother.get(channel);
-            buffer[sample] = sample_volume * noise;
+            buffer[sample] = sample_volume * sine;
         }
+    }
+}
+
+// period T := 1/f <-> sample duration := 1/rate
+// 2pi             <-> increment = 2pif / rate
+
+void MainComponent::set_frequency(double f) {
+    this->frequency = f;
+    this->oscillator_phase_increment =
+        2.0 * juce::MathConstants<double>::pi * f / sample_rate;
+}
+
+void MainComponent::advance_phase(int channel) {
+    this->oscillator_phase[channel] += this->oscillator_phase_increment;
+    if (this->oscillator_phase[channel] >=
+        2.0 * juce::MathConstants<double>::pi) {
+        this->oscillator_phase[channel] -=
+            2.0 * juce::MathConstants<double>::pi;
     }
 }
 

@@ -4,6 +4,8 @@
 
 #include "StereoIntegrator.hpp"
 
+#include <array>
+
 class MainComponent final : public juce::AudioAppComponent,
                             public juce::Slider::Listener {
    public:
@@ -19,8 +21,13 @@ class MainComponent final : public juce::AudioAppComponent,
 
     void sliderValueChanged(juce::Slider* slider) override;
 
+    void set_frequency(double freq);
+
    private:
-    double oscillator_phase{};
+    void advance_phase(int channel);
+
+    double frequency;
+    std::array<double, 2> oscillator_phase{};
     double oscillator_phase_increment{};
     double sample_rate{};
 
