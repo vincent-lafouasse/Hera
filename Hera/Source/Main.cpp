@@ -47,7 +47,7 @@ class Application : public juce::JUCEApplication {
             centreWithSize(getWidth(), getHeight());
 #endif
 
-            setVisible(true);
+            DocumentWindow::setVisible(true);
         }
 
         void closeButtonPressed() override { app.systemRequestedQuit(); }
