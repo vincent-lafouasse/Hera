@@ -24,7 +24,7 @@ class MainComponent final : public juce::AudioAppComponent,
 
     std::atomic<float> volume;
     juce::Slider volume_knob;
-    StereoIntegrator volume_smoother;
+    StereoIntegrator<float> volume_smoother;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };
