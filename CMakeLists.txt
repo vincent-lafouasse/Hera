@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 project(Hera VERSION 0.0.1)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic")
 
 #This is temporarily needed due to a bug in Xcode 15:
 if (CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
