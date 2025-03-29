@@ -20,11 +20,11 @@ class MainComponent final : public juce::AudioAppComponent,
     void sliderValueChanged(juce::Slider* slider) override;
 
    private:
-    juce::Random random;
-
     std::atomic<float> volume;
     juce::Slider volume_knob;
     StereoIntegrator<float> volume_smoother;
+
+    juce::Random random;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };
