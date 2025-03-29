@@ -6,17 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic")
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
-set(LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
-
-include(cmake/cpm.cmake)
 include(cmake/platform.cmake)
 
-CPMAddPackage(
-    NAME JUCE
-    GIT_TAG 8.0.6
-    VERSION 8.0.6
-    GITHUB_REPOSITORY juce-framework/JUCE
-    SOURCE_DIR ${LIB_DIR}/juce
-)
-
+add_subdirectory(lib/juce)
 add_subdirectory(Hera)

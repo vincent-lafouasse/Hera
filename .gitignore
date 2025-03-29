@@ -5,8 +5,6 @@ SDKs
 build
 build-ios
 
-lib/
-
 cmake-build-debug
 cmake-build-release
 CMakeFiles
