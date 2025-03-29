@@ -6,8 +6,6 @@
 //==============================================================================
 HeraEditor::HeraEditor(HeraProcessor& p)
     : AudioProcessorEditor(&p), audioProcessor(p) {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
     constexpr int width = 200;
     constexpr int height = 400;
     setSize(width, height);
