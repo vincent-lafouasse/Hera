@@ -7,7 +7,7 @@ target_sources(${TargetName} PRIVATE
         Source/Main.cpp
         Source/MainComponent.cpp
         Source/MainComponent.hpp
-		Source/StereoIntegrator.hpp
+		Source/Integrator.hpp
 )
 
 target_compile_definitions(${TargetName} PRIVATE

@@ -2,7 +2,7 @@
 
 #include "JuceHeader.h"
 
-#include "StereoIntegrator.hpp"
+#include "Integrator.hpp"
 
 #include <array>
 
@@ -33,7 +33,7 @@ class MainComponent final : public juce::AudioAppComponent,
 
     std::atomic<float> volume;
     juce::Slider volume_knob;
-    StereoIntegrator<float> volume_smoother;
+    Integrator<2, float> volume_smoother;
 
     juce::Random random;
 
