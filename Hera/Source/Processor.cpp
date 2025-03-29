@@ -43,15 +43,16 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
 }
 
 void HeraProcessor::prepareToPlay(double sampleRate, int samplesPerBlock) {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need...
-    (void)sampleRate;
-    (void)samplesPerBlock;
+    // not much to do here so let's say hi
+    juce::String message;
+    message << "Preparing to play audio...\n";
+    message << " samplesPerBlockExpected = " << samplesPerBlock << "\n";
+    message << " sampleRate = " << sampleRate;
+    juce::Logger::writeToLog(message);
 }
 
 void HeraProcessor::releaseResources() {
-    // When playback stops, you can use this as an opportunity to free up any
-    // spare memory, etc.
+    juce::Logger::writeToLog("Releasing audio resources");
 }
 
 //================== boiler plate =============================================
@@ -116,7 +117,7 @@ bool HeraProcessor::isBusesLayoutSupported(const BusesLayout& layouts) const {
         layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
         return false;
 
-        // This checks if the input layout matches the output layout
+    // This checks if the input layout matches the output layout
 #if !JucePlugin_IsSynth
     if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
         return false;
