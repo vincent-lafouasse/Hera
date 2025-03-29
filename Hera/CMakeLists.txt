@@ -1,34 +1,42 @@
-set (TargetName Hera)
+set(TargetName Hera)
 
-juce_add_gui_app(${TargetName} PRODUCT_NAME "Hera")
+juce_add_plugin("${TargetName}"
+        # VERSION ...
+        # ICON_BIG ...
+        # ICON_SMALL ...
+        COMPANY_NAME "Poss"
+        IS_SYNTH TRUE
+        NEEDS_MIDI_INPUT TRUE
+        NEEDS_MIDI_OUTPUT FALSE
+        IS_MIDI_EFFECT FALSE
+        EDITOR_WANTS_KEYBOARD_FOCUS FALSE
+        COPY_PLUGIN_AFTER_BUILD TRUE
+        PLUGIN_MANUFACTURER_CODE Juce
+        PLUGIN_CODE MIpl
+        FORMATS AU VST3 Standalone
+        PRODUCT_NAME "${TargetName}"
+)
 juce_generate_juce_header(${TargetName})
 
 target_sources(${TargetName} PRIVATE
-        Source/Main.cpp
-        Source/MainComponent.cpp
-        Source/MainComponent.hpp
-		Source/Integrator.hpp
+        Source/Processor.cpp
+        Source/Processor.hpp
+        Source/Editor.cpp
+        Source/Editor.hpp
+        Source/Integrator.hpp
+        Source/Parameters.h
 )
 
-target_compile_definitions(${TargetName} PRIVATE
+target_compile_definitions(${TargetName}
+        PUBLIC
         JUCE_WEB_BROWSER=0
         JUCE_USE_CURL=0
-        JUCE_APPLICATION_NAME_STRING="$<TARGET_PROPERTY:${TargetName},JUCE_PROJECT_NAME>"
-        JUCE_APPLICATION_VERSION_STRING="$<TARGET_PROPERTY:${TargetName},JUCE_VERSION>")
+        JUCE_VST3_CAN_REPLACE_VST2=0
+)
 
 target_link_libraries(${TargetName} PRIVATE
-        juce::juce_recommended_config_flags
-        juce::juce_recommended_lto_flags
-        juce::juce_recommended_warning_flags
-        juce::juce_audio_basics
-        juce::juce_audio_devices
-        juce::juce_audio_formats
-        juce::juce_audio_processors
-        juce::juce_audio_utils
-        juce::juce_core
-        juce::juce_data_structures
-        juce::juce_events
-        juce::juce_graphics
-        juce::juce_gui_basics
-        juce::juce_gui_extra
+        juce_recommended_config_flags
+        juce_recommended_lto_flags
+        juce_recommended_warning_flags
+        juce_audio_utils
 )
