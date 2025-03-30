@@ -51,6 +51,7 @@ class HeraProcessor final : public juce::AudioProcessor
     //==============================================================================
 
     void set_volume(float vol);
+    void set_frequency(float freq);
 
    private:
     std::atomic<float> volume;
@@ -59,6 +60,8 @@ class HeraProcessor final : public juce::AudioProcessor
     float frequency{};
     float phase{};
     float phase_increment{};
+
+    float sample_rate{};
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(HeraProcessor)
 };

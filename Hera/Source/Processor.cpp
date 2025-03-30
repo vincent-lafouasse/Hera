@@ -49,9 +49,8 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
 // 2pi             <-> phase_increment = 2pi f / sample_rate
 
 void HeraProcessor::prepareToPlay(double sampleRate, int samplesPerBlock) {
-    this->frequency = 220.0f;
-    this->phase_increment = juce::MathConstants<float>::twoPi *
-                            this->frequency / static_cast<float>(sampleRate);
+    this->sample_rate = sampleRate;
+    this->set_frequency(220.0f);
 
     juce::String message;
     message << "Preparing to play audio...\n";
@@ -64,8 +63,14 @@ void HeraProcessor::releaseResources() {
     juce::Logger::writeToLog("Releasing audio resources");
 }
 
-void HeraProcessor::set_volume(float vol) {
+void HeraProcessor::set_volume(const float vol) {
     this->volume.store(vol);
+}
+
+void HeraProcessor::set_frequency(const float freq) {
+    this->frequency = freq;
+    this->phase_increment =
+        juce::MathConstants<float>::twoPi * this->frequency / this->sample_rate;
 }
 
 //================== boiler plate =============================================
