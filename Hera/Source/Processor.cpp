@@ -64,6 +64,10 @@ void HeraProcessor::releaseResources() {
     juce::Logger::writeToLog("Releasing audio resources");
 }
 
+void HeraProcessor::set_volume(float vol) {
+    this->volume.store(vol);
+}
+
 //================== boiler plate =============================================
 
 const juce::String HeraProcessor::getName() const {

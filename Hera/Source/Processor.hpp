@@ -50,9 +50,10 @@ class HeraProcessor final : public juce::AudioProcessor
     void setStateInformation(const void* data, int sizeInBytes) override;
     //==============================================================================
 
-    std::atomic<float> volume;
+    void set_volume(float vol);
 
    private:
+    std::atomic<float> volume;
     Integrator<1, float> volume_smoother;
 
     float frequency{};

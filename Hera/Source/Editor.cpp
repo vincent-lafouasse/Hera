@@ -53,6 +53,6 @@ void HeraEditor::resized() {
 
 void HeraEditor::sliderValueChanged(juce::Slider* slider) {
     if (slider == &volume_knob) {
-        audioProcessor.volume.store(static_cast<float>(volume_knob.getValue()));
+        audioProcessor.set_volume(static_cast<float>(volume_knob.getValue()));
     }
 }
