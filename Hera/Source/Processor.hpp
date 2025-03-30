@@ -53,9 +53,11 @@ class HeraProcessor final : public juce::AudioProcessor
     std::atomic<float> volume;
 
    private:
-    Integrator<2, float> volume_smoother;
+    Integrator<1, float> volume_smoother;
 
-    juce::Random random;
+    float frequency{};
+    float phase{};
+    float phase_increment{};
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(HeraProcessor)
 };

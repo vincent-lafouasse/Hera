@@ -25,25 +25,34 @@ HeraProcessor::~HeraProcessor() = default;
 
 void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
                                  juce::MidiBuffer&) {
-    const auto nChannels = static_cast<size_t>(getTotalNumOutputChannels());
+    auto* left_channel = buffer.getWritePointer(0);
+    auto* right_channel = buffer.getWritePointer(1);
+    const auto bufferSize = buffer.getNumSamples();
 
     volume_smoother.setTarget(volume.load());
 
-    for (size_t channel = 0; channel < nChannels; ++channel) {
-        auto* channelData = buffer.getWritePointer(static_cast<int>(channel));
-        const auto bufferSize = static_cast<size_t>(buffer.getNumSamples());
-
-        for (size_t sample = 0; sample < bufferSize; sample++) {
-            constexpr float noise_amplitude = 0.1f;
-            const float noise =
-                noise_amplitude * (2.0f * random.nextFloat() - 1.0f);
-            channelData[sample] = volume_smoother.get(channel) * noise;
+    for (auto i = 0; i < bufferSize; ++i) {
+        constexpr float sine_volume = 0.5f;
+        const float sine = sine_volume * std::sin(this->phase);
+        this->phase += this->phase_increment;
+        if (this->phase >= juce::MathConstants<float>::twoPi) {
+            this->phase -= juce::MathConstants<float>::twoPi;
         }
+
+        const auto smoothed_volume = volume_smoother.get(0);
+        left_channel[i] = smoothed_volume * sine;
+        right_channel[i] = smoothed_volume * sine;
     }
 }
 
+// period T = 1/f  <-> sample len delta_t = 1/sample_rate
+// 2pi             <-> phase_increment = 2pi f / sample_rate
+
 void HeraProcessor::prepareToPlay(double sampleRate, int samplesPerBlock) {
-    // not much to do here so let's say hi
+    this->frequency = 220.0f;
+    this->phase_increment = juce::MathConstants<float>::twoPi *
+                            this->frequency / static_cast<float>(sampleRate);
+
     juce::String message;
     message << "Preparing to play audio...\n";
     message << " samplesPerBlockExpected = " << samplesPerBlock << "\n";
