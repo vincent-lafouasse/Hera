@@ -18,7 +18,7 @@ HeraProcessor::HeraProcessor()
                                        true))
 
       ,
-      volume(0),
+      nominal_volume(0),
       volume_smoother(0.1f, 0.9f) {}
 
 HeraProcessor::~HeraProcessor() = default;
@@ -29,7 +29,7 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
     auto* right_channel = buffer.getWritePointer(1);
     const auto bufferSize = buffer.getNumSamples();
 
-    volume_smoother.setTarget(volume.load());
+    volume_smoother.setTarget(nominal_volume.load());
 
     for (auto i = 0; i < bufferSize; ++i) {
         constexpr float sine_volume = 0.5f;
@@ -64,7 +64,7 @@ void HeraProcessor::releaseResources() {
 }
 
 void HeraProcessor::set_volume(const float vol) {
-    this->volume.store(vol);
+    this->nominal_volume.store(vol);
 }
 
 void HeraProcessor::set_frequency(const float freq) {

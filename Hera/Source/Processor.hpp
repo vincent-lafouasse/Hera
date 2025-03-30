@@ -54,7 +54,7 @@ class HeraProcessor final : public juce::AudioProcessor
     void set_frequency(float freq);
 
    private:
-    std::atomic<float> volume;
+    std::atomic<float> nominal_volume;
     Integrator<1, float> volume_smoother;
 
     float frequency{};
