@@ -10,6 +10,8 @@
 #include "Editor.hpp"
 #include "Integrator.hpp"
 
+#include <cassert>
+
 //==============================================================================
 HeraProcessor::HeraProcessor()
     : AudioProcessor(
@@ -19,7 +21,9 @@ HeraProcessor::HeraProcessor()
 
       ,
       nominal_volume(0),
-      volume_smoother(0.1f, 0.9f) {}
+      volume_smoother(0.1f, 0.9f) {
+    assert(std::atomic<float>::is_always_lock_free);
+}
 
 HeraProcessor::~HeraProcessor() = default;
 
