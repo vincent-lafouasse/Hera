@@ -43,7 +43,7 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
             this->phase -= juce::MathConstants<float>::twoPi;
         }
 
-        const auto smoothed_volume = volume_smoother.get(0);
+        const auto smoothed_volume = volume_smoother.get();
         left_channel[i] = smoothed_volume * sine;
         right_channel[i] = smoothed_volume * sine;
     }
