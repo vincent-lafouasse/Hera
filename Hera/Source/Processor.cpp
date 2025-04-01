@@ -8,7 +8,6 @@
 
 #include "Processor.hpp"
 #include "Editor.hpp"
-#include "Integrator.hpp"
 
 #include <cassert>
 
