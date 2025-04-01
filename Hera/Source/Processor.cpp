@@ -61,7 +61,8 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
 // period T = 1/f  <-> sample len delta_t = 1/sample_rate
 // 2pi             <-> phase_increment = 2pi f / sample_rate
 
-void HeraProcessor::prepareToPlay(double sampleRate, int samplesPerBlock) {
+void HeraProcessor::prepareToPlay(const double sampleRate,
+                                  const int samplesPerBlock) {
     this->sample_rate = static_cast<float>(sampleRate);
     this->set_frequency(220.0f);
 
@@ -118,16 +119,17 @@ int HeraProcessor::getCurrentProgram() {
     return 0;
 }
 
-void HeraProcessor::setCurrentProgram(int index) {
+void HeraProcessor::setCurrentProgram(const int index) {
     (void)index;
 }
 
-const juce::String HeraProcessor::getProgramName(int index) {
+const juce::String HeraProcessor::getProgramName(const int index) {
     (void)index;
     return "Hera";
 }
 
-void HeraProcessor::changeProgramName(int index, const juce::String& newName) {
+void HeraProcessor::changeProgramName(const int index,
+                                      const juce::String& newName) {
     (void)index;
     (void)newName;
 }
@@ -159,7 +161,8 @@ void HeraProcessor::getStateInformation(juce::MemoryBlock& destData) {
     (void)destData;
 }
 
-void HeraProcessor::setStateInformation(const void* data, int sizeInBytes) {
+void HeraProcessor::setStateInformation(const void* data,
+                                        const int sizeInBytes) {
     // You should use this method to restore your parameters from this memory
     // block, whose contents will have been created by the getStateInformation()
     // call.
