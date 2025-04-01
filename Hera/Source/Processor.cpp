@@ -12,6 +12,16 @@
 
 #include <cassert>
 
+namespace {
+template <typename NumericType>
+void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
+    value += addend;
+    while (value >= limit) {
+        value -= limit;
+    }
+}
+};  // namespace
+
 //==============================================================================
 HeraProcessor::HeraProcessor()
     : AudioProcessor(
@@ -37,10 +47,8 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
     for (auto i = 0; i < bufferSize; ++i) {
         constexpr float sine_volume = 0.5f;
         const float sine = sine_volume * std::sin(this->phase);
-        this->phase += this->phase_increment;
-        if (this->phase >= juce::MathConstants<float>::twoPi) {
-            this->phase -= juce::MathConstants<float>::twoPi;
-        }
+        wrapping_add(this->phase, this->phase_increment,
+                     juce::MathConstants<float>::twoPi);
 
         if (!juce::approximatelyEqual(this->volume, target_volume)) {
             this->volume = 0.5 * (target_volume + this->volume);
