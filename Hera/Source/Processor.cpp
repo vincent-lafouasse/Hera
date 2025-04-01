@@ -19,7 +19,7 @@ void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
         value -= limit;
     }
 }
-};  // namespace
+}  // namespace
 
 //==============================================================================
 HeraProcessor::HeraProcessor()
