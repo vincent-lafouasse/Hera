@@ -22,9 +22,7 @@ class Integrator {
         return memory_[channel];
     }
 
-    FloatType get() {
-        return this->get(0);
-    }
+    FloatType get() { return this->get(0); }
 
    private:
     FloatType target_{};
