@@ -50,7 +50,7 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
                      juce::MathConstants<float>::twoPi);
 
         if (!juce::approximatelyEqual(this->volume, target_volume)) {
-            this->volume = 0.5 * (target_volume + this->volume);
+            this->volume = 0.5f * (target_volume + this->volume);
         }
 
         left_channel[i] = this->volume * sine;
