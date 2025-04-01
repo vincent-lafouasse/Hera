@@ -20,8 +20,7 @@ HeraProcessor::HeraProcessor()
                                        true))
 
       ,
-      nominal_volume(0),
-      volume_smoother(0.1f, 0.9f) {
+      nominal_volume(0) {
     assert(std::atomic<float>::is_always_lock_free);
 }
 
@@ -33,7 +32,7 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
     auto* right_channel = buffer.getWritePointer(1);
     const auto bufferSize = buffer.getNumSamples();
 
-    volume_smoother.setTarget(nominal_volume.load(std::memory_order_relaxed));
+    float target_volume = nominal_volume.load(std::memory_order_relaxed);
 
     for (auto i = 0; i < bufferSize; ++i) {
         constexpr float sine_volume = 0.5f;
@@ -43,9 +42,12 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
             this->phase -= juce::MathConstants<float>::twoPi;
         }
 
-        const auto smoothed_volume = volume_smoother.get();
-        left_channel[i] = smoothed_volume * sine;
-        right_channel[i] = smoothed_volume * sine;
+        if (!juce::approximatelyEqual(this->volume, target_volume)) {
+            this->volume = 0.5 * (target_volume + this->volume);
+        }
+
+        left_channel[i] = this->volume * sine;
+        right_channel[i] = this->volume * sine;
     }
 }
 
