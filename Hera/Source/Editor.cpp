@@ -31,7 +31,7 @@ HeraEditor::HeraEditor(HeraProcessor& p)
 
 HeraEditor::~HeraEditor() = default;
 
-juce::String VolumeKnob::getTextFromValue(double value) {
+juce::String VolumeKnob::getTextFromValue(const double value) {
     std::stringstream ss{};
     ss << std::fixed;
     ss << std::setprecision(1);
