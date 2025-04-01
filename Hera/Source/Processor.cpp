@@ -62,7 +62,7 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
 // 2pi             <-> phase_increment = 2pi f / sample_rate
 
 void HeraProcessor::prepareToPlay(double sampleRate, int samplesPerBlock) {
-    this->sample_rate = sampleRate;
+    this->sample_rate = static_cast<float>(sampleRate);
     this->set_frequency(220.0f);
 
     juce::String message;
