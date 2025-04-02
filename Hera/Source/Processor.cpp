@@ -21,8 +21,8 @@ void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
 }
 }  // namespace
 
-const std::string HeraProcessor::gain_id = "gain";
-const std::string HeraProcessor::gain_name = "GAIN";
+const std::string HeraProcessor::volume_id = "volume";
+const std::string HeraProcessor::volume_name = "Volume";
 
 //==============================================================================
 HeraProcessor::HeraProcessor()
@@ -36,8 +36,8 @@ HeraProcessor::HeraProcessor()
              nullptr,
              "PARAMETERS",
              {std::make_unique<AudioParameterFloat>(
-                 HeraProcessor::gain_id,
-                 HeraProcessor::gain_name,
+                 HeraProcessor::volume_id,
+                 HeraProcessor::volume_name,
                  NormalisableRange<float>(0.0f, 1.0f),
                  0.5f)}) {
     assert(std::atomic<float>::is_always_lock_free);
@@ -51,8 +51,9 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
     auto* right_channel = buffer.getWritePointer(1);
     const auto bufferSize = buffer.getNumSamples();
 
-    float target_volume = this->params.getRawParameterValue(gain_id)->load(
-        std::memory_order_relaxed);
+    float target_volume =
+        this->params.getRawParameterValue(HeraProcessor::volume_id)
+            ->load(std::memory_order_relaxed);
 
     for (auto i = 0; i < bufferSize; ++i) {
         constexpr float sine_volume = 0.5f;

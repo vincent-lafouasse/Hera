@@ -64,8 +64,8 @@ class HeraProcessor final : public juce::AudioProcessor
     float sample_rate{};
 
    public:
-    static const std::string gain_id;
-    static const std::string gain_name;
+    static const std::string volume_id;
+    static const std::string volume_name;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(HeraProcessor)
 };
