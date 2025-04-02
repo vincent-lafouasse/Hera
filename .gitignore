@@ -12,8 +12,6 @@ CMakeCache.txt
 cmake_install.cmake
 CMakeScripts
 
-.idea
-
 IDEWorkspaceChecks.plist
 UserInterfaceState.xcuserstate
 xcschememanagement.plist
