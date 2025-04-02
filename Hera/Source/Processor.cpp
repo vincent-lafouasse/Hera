@@ -32,7 +32,7 @@ HeraProcessor::HeraProcessor()
                                        true))
 
       ,
-      params(*this, nullptr),
+      params(*this, nullptr, "PARAMETERS", {}),
       nominal_volume(0) {
     assert(std::atomic<float>::is_always_lock_free);
 }
