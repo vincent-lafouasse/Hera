@@ -22,6 +22,9 @@ class HeraEditor final : public juce::AudioProcessorEditor {
     void resized() override;
 
    private:
+    void setupGainKnob();
+
+   private:
     HeraProcessor& audioProcessor;
 
     VolumeKnob volume_knob;

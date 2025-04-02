@@ -6,12 +6,19 @@
 //==============================================================================
 HeraEditor::HeraEditor(HeraProcessor& p)
     : AudioProcessorEditor(&p), audioProcessor(p) {
-    this->volume_attachment =
-        std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
-            audioProcessor.params, HeraProcessor::volume_id, this->volume_knob);
     constexpr int width = 200;
     constexpr int height = 400;
     setSize(width, height);
+
+    HeraEditor::setupGainKnob();
+}
+
+HeraEditor::~HeraEditor() = default;
+
+void HeraEditor::setupGainKnob() {
+    this->volume_attachment =
+        std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+            audioProcessor.params, HeraProcessor::volume_id, this->volume_knob);
 
     addAndMakeVisible(volume_knob);
     volume_knob.setSliderStyle(
@@ -28,8 +35,6 @@ HeraEditor::HeraEditor(HeraProcessor& p)
     volume_label.setText("Volume", juce::dontSendNotification);
     volume_label.attachToComponent(&volume_knob, true);
 }
-
-HeraEditor::~HeraEditor() = default;
 
 juce::String VolumeKnob::getTextFromValue(const double value) {
     std::stringstream ss{};
