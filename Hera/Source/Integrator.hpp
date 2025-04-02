@@ -6,8 +6,9 @@
 #define INTEGRATOR_HPP
 
 #include <array>
+#include <cstddef>
 
-template <size_t nChannels, typename FloatType>
+template <std::size_t nChannels, typename FloatType>
 class Integrator {
    public:
     Integrator(FloatType inertia_weight, FloatType forward_weight)
