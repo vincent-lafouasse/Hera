@@ -2,7 +2,7 @@
 
 SDKs
 
-build
+target
 build-ios
 
 cmake-build-debug
