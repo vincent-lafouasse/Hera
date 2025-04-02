@@ -32,7 +32,14 @@ HeraProcessor::HeraProcessor()
                                        true))
 
       ,
-      params(*this, nullptr, "PARAMETERS", {}),
+      params(*this,
+             nullptr,
+             "PARAMETERS",
+             {std::make_unique<AudioParameterFloat>(
+                 HeraProcessor::gain_id,
+                 HeraProcessor::gain_name,
+                 NormalisableRange<float>(0.0f, 1.0f),
+                 0.5f)}),
       nominal_volume(0) {
     assert(std::atomic<float>::is_always_lock_free);
 }
