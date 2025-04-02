@@ -10,7 +10,7 @@ HeraEditor::HeraEditor(HeraProcessor& p)
     constexpr int height = 400;
     setSize(width, height);
 
-    HeraEditor::setupGainKnob();
+    this->setupGainKnob();
 }
 
 HeraEditor::~HeraEditor() = default;
