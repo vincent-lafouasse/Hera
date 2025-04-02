@@ -6,6 +6,9 @@
 //==============================================================================
 HeraEditor::HeraEditor(HeraProcessor& p)
     : AudioProcessorEditor(&p), audioProcessor(p) {
+    this->volume_attachment =
+        std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+            audioProcessor.params, HeraProcessor::gain_id, this->volume_knob);
     constexpr int width = 200;
     constexpr int height = 400;
     setSize(width, height);

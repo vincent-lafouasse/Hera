@@ -24,12 +24,14 @@ class HeraEditor final : public juce::AudioProcessorEditor,
     void sliderValueChanged(juce::Slider* slider) override;
 
    private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
     HeraProcessor& audioProcessor;
 
     VolumeKnob volume_knob;
     juce::Label volume_label;
+
+   public:
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment>
+        volume_attachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(HeraEditor)
 };

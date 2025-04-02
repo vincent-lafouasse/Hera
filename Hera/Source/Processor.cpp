@@ -21,6 +21,9 @@ void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
 }
 }  // namespace
 
+const std::string HeraProcessor::gain_id = "gain";
+const std::string HeraProcessor::gain_name = "GAIN";
+
 //==============================================================================
 HeraProcessor::HeraProcessor()
     : AudioProcessor(
@@ -29,6 +32,7 @@ HeraProcessor::HeraProcessor()
                                        true))
 
       ,
+      params(*this, nullptr),
       nominal_volume(0) {
     assert(std::atomic<float>::is_always_lock_free);
 }
