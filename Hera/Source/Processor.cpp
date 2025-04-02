@@ -24,6 +24,18 @@ void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
 const std::string HeraProcessor::volume_id = "volume";
 const std::string HeraProcessor::volume_name = "Volume";
 
+AudioProcessorValueTreeState::ParameterLayout
+HeraProcessor::createParameterLayout() {
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
+    auto volume_parameter = std::make_unique<AudioParameterFloat>(
+        HeraProcessor::volume_id, HeraProcessor::volume_name,
+        NormalisableRange<float>(0.0f, 1.0f), 0.5f);
+    params.push_back(std::move(volume_parameter));
+
+    return {params.begin(), params.end()};
+}
+
 //==============================================================================
 HeraProcessor::HeraProcessor()
     : AudioProcessor(
@@ -35,11 +47,7 @@ HeraProcessor::HeraProcessor()
       params(*this,
              nullptr,
              "PARAMETERS",
-             {std::make_unique<AudioParameterFloat>(
-                 HeraProcessor::volume_id,
-                 HeraProcessor::volume_name,
-                 NormalisableRange<float>(0.0f, 1.0f),
-                 0.5f)}) {
+             HeraProcessor::createParameterLayout()) {
     assert(std::atomic<float>::is_always_lock_free);
 }
 
