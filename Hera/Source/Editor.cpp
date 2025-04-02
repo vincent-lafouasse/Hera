@@ -22,10 +22,7 @@ HeraEditor::HeraEditor(HeraProcessor& p)
         juce::Slider::TextEntryBoxPosition::TextBoxBelow, true,
         value_textbox_width, value_textbox_height);
 
-    volume_knob.setRange(0.0, 1.0);
-    volume_knob.setValue(0.5);
     volume_knob.setDoubleClickReturnValue(true, 0.5);
-    volume_knob.addListener(this);
 
     addAndMakeVisible(volume_label);
     volume_label.setText("Volume", juce::dontSendNotification);
@@ -52,10 +49,4 @@ void HeraEditor::paint(juce::Graphics& g) {
 
 void HeraEditor::resized() {
     volume_knob.setBounds(getLocalBounds());
-}
-
-void HeraEditor::sliderValueChanged(juce::Slider* slider) {
-    if (slider == &volume_knob) {
-        audioProcessor.set_volume(static_cast<float>(volume_knob.getValue()));
-    }
 }
