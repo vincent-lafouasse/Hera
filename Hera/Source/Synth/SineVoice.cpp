@@ -2,9 +2,39 @@
 
 #include "SineSound.hpp"
 
+namespace {
+template <typename NumericType>
+void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
+    value += addend;
+    while (value >= limit) {
+        value -= limit;
+    }
+}
+}  // namespace
+
 void SineVoice::renderNextBlock(AudioBuffer<float>& outputBuffer,
                                 const int startSample,
-                                const int numSamples) {}
+                                const int numSamples) {
+    if (this->phaseIncrement == 0.0)
+        return;
+
+    const auto nChannels = outputBuffer.getNumChannels();
+
+    if (this->tailOff != 0.0) {
+        // decaying
+        return;
+    }
+
+    for (int i = 0; i < numSamples; i++) {
+        const float sine = this->level * std::sin(this->phase);
+        wrapping_add(this->phase, this->phaseIncrement,
+                     juce::MathConstants<double>::twoPi);
+
+        for (auto channel{}; channel < nChannels; ++channel) {
+            outputBuffer.addSample(channel, startSample + i, sine);
+        }
+    }
+}
 
 void SineVoice::startNote(const int midiNote,
                           const float velocity,
