@@ -3,15 +3,22 @@
 #include <sstream>
 #include "Processor.hpp"
 
+namespace {
+constexpr int windowWidth = 1600;
+constexpr int windowHeight = 400;
+
+constexpr int volumeKnobSize = 100;
+
+constexpr int margin = 15;
+}  // namespace
+
 //==============================================================================
 HeraEditor::HeraEditor(HeraProcessor& p)
     : AudioProcessorEditor(&p),
       audioProcessor(p),
       keyboardComponent(p.keyboardState,
                         KeyboardComponentBase::horizontalKeyboard) {
-    constexpr int width = 200;
-    constexpr int height = 400;
-    setSize(width, height);
+    setSize(windowWidth, windowHeight);
 
     this->setupKeyboard();
     this->setupGainKnob();
@@ -42,6 +49,11 @@ void HeraEditor::setupGainKnob() {
     volume_label.attachToComponent(&volume_knob, true);
 }
 
+void HeraEditor::resized() {
+    volume_knob.setBounds(margin, (windowHeight - volumeKnobSize) / 2,
+                          volumeKnobSize, volumeKnobSize);
+}
+
 juce::String VolumeKnob::getTextFromValue(const double value) {
     std::stringstream ss{};
     ss << std::fixed;
@@ -56,8 +68,4 @@ void HeraEditor::paint(juce::Graphics& g) {
     // a solid colour)
     g.fillAll(
         getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-}
-
-void HeraEditor::resized() {
-    volume_knob.setBounds(getLocalBounds());
 }
