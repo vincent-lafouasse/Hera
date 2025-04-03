@@ -31,6 +31,7 @@ void HeraEditor::setupKeyboard() {
     constexpr int c1 = 24;
     constexpr int c6 = 84;
     keyboardComponent.setAvailableRange(c1, c6);
+    keyboardComponent.setKeyWidth(23);
 }
 
 void HeraEditor::setupGainKnob() {
@@ -62,8 +63,8 @@ void HeraEditor::resized() {
     juce::Rectangle<int> area = getLocalBounds();
 
     constexpr int componentHeight = static_cast<int>(screenHeight * 0.90);
-    constexpr int volumeSectionWidth = static_cast<int>(screenWidth * 0.15);
-    constexpr int keyboardSectionWidth = static_cast<int>(screenWidth * 0.85);
+    constexpr int keyboardSectionWidth = 828;
+    constexpr int volumeSectionWidth = screenWidth - keyboardSectionWidth;
 
     volume_knob.setBounds(
         area.removeFromLeft(volumeSectionWidth).removeFromTop(componentHeight));
