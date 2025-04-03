@@ -56,6 +56,8 @@ class HeraProcessor final : public juce::AudioProcessor
     createParameterLayout();
     juce::AudioProcessorValueTreeState params;
 
+    juce::MidiKeyboardState keyboardState{};
+
    private:
     float volume{};
 
