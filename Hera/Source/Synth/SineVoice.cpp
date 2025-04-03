@@ -3,13 +3,13 @@
 #include "SineSound.hpp"
 
 void SineVoice::renderNextBlock(AudioBuffer<float>& outputBuffer,
-                                int startSample,
-                                int numSamples) {}
+                                const int startSample,
+                                const int numSamples) {}
 
-void SineVoice::startNote(int midiNote,
-                          float velocity,
+void SineVoice::startNote(const int midiNote,
+                          const float velocity,
                           juce::SynthesiserSound* sound,
-                          int /*pitchWheelPosition*/) {
+                          const int /*pitchWheelPosition*/) {
     this->phase = 0.0f;
     this->level = 0.15 * velocity;
     this->tailOff = 0.0;
@@ -20,12 +20,13 @@ void SineVoice::startNote(int midiNote,
         frequency * juce::MathConstants<float>::twoPi / getSampleRate();
 }
 
-void SineVoice::stopNote(float velocity, bool allowTailOff) {}
+void SineVoice::stopNote(const float velocity, const bool allowTailOff) {}
 
-void SineVoice::pitchWheelMoved(int newPitchWheelValue) {
+void SineVoice::pitchWheelMoved(const int newPitchWheelValue) {
     (void)newPitchWheelValue;
 }
-void SineVoice::controllerMoved(int controllerNumber, int newControllerValue) {
+void SineVoice::controllerMoved(const int controllerNumber,
+                                int const newControllerValue) {
     (void)controllerNumber;
     (void)newControllerValue;
 }
