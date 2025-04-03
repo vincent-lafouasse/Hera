@@ -55,13 +55,16 @@ void HeraEditor::setupGainKnob() {
 }
 
 void HeraEditor::resized() {
-    constexpr float keyboardWidth = 0.85f;
-    constexpr float volumeKnobSize = 1.0 - keyboardWidth;
+    juce::Rectangle<int> area = getLocalBounds();
 
-    volume_knob.setBoundsRelative(0.0, 0.0, volumeKnobSize, 1.0);
+    constexpr int componentHeight = static_cast<int>(screenHeight * 0.90);
+    constexpr int volumeSectionWidth = static_cast<int>(screenWidth * 0.15);
+    constexpr int keyboardSectionWidth = static_cast<int>(screenWidth * 0.85);
 
-    keyboardComponent.setBoundsRelative(volumeKnobSize, 0.0, keyboardWidth,
-                                        1.0);
+    volume_knob.setBounds(
+        area.removeFromLeft(volumeSectionWidth).removeFromTop(componentHeight));
+    keyboardComponent.setBounds(area.removeFromLeft(keyboardSectionWidth)
+                                    .removeFromTop(componentHeight));
 }
 
 juce::String VolumeKnob::getTextFromValue(const double value) {
