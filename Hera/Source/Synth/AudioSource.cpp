@@ -1,6 +1,6 @@
-#include "SynthAudioSource.hpp"
+#include "AudioSource.hpp"
 
-#include "SineVoice.hpp"
+#include "Voice.hpp"
 
 void SynthAudioSource::prepareToPlay(int samplesPerBlockExpected,
                                      double sampleRate) {

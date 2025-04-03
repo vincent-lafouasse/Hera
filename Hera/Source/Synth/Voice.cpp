@@ -1,4 +1,4 @@
-#include "SineVoice.hpp"
+#include "Voice.hpp"
 
 namespace {
 template <typename NumericType>
@@ -10,7 +10,7 @@ void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
 }
 }  // namespace
 
-void SineVoice::renderNextBlock(AudioBuffer<float>& outputBuffer,
+void Voice::renderNextBlock(AudioBuffer<float>& outputBuffer,
                                 const int startSample,
                                 const int numSamples) {
     if (this->phaseIncrement == 0.0)
@@ -53,7 +53,7 @@ void SineVoice::renderNextBlock(AudioBuffer<float>& outputBuffer,
     }
 }
 
-void SineVoice::startNote(const int midiNote,
+void Voice::startNote(const int midiNote,
                           const float velocity,
                           juce::SynthesiserSound* sound,
                           const int /*pitchWheelPosition*/) {
@@ -69,7 +69,7 @@ void SineVoice::startNote(const int midiNote,
         frequency * juce::MathConstants<float>::twoPi / getSampleRate();
 }
 
-void SineVoice::stopNote(const float velocity, const bool allowTailOff) {
+void Voice::stopNote(const float velocity, const bool allowTailOff) {
     (void)velocity;
 
     if (allowTailOff) {
@@ -82,15 +82,15 @@ void SineVoice::stopNote(const float velocity, const bool allowTailOff) {
     }
 }
 
-void SineVoice::pitchWheelMoved(const int newPitchWheelValue) {
+void Voice::pitchWheelMoved(const int newPitchWheelValue) {
     (void)newPitchWheelValue;
 }
-void SineVoice::controllerMoved(const int controllerNumber,
+void Voice::controllerMoved(const int controllerNumber,
                                 int const newControllerValue) {
     (void)controllerNumber;
     (void)newControllerValue;
 }
 
-bool SineVoice::canPlaySound(juce::SynthesiserSound* sound) {
+bool Voice::canPlaySound(juce::SynthesiserSound* sound) {
     return dynamic_cast<SynthSound*>(sound) != nullptr;
 }

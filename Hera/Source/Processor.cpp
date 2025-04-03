@@ -8,7 +8,7 @@
 
 #include "Processor.hpp"
 #include "Gui/Editor.hpp"
-#include "Synth/SynthAudioSource.hpp"
+#include "Synth/AudioSource.hpp"
 
 #include <cassert>
 

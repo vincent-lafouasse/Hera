@@ -23,10 +23,10 @@ target_sources(${TargetName} PRIVATE
         Source/Processor.hpp
         Source/Integrator.hpp
 
-		Source/Synth/SynthAudioSource.cpp
-		Source/Synth/SynthAudioSource.hpp
-		Source/Synth/SineVoice.cpp
-		Source/Synth/SineVoice.hpp
+		Source/Synth/AudioSource.cpp
+		Source/Synth/AudioSource.hpp
+		Source/Synth/Voice.cpp
+		Source/Synth/Voice.hpp
 
 		Source/Gui/Editor.cpp
 		Source/Gui/Editor.hpp

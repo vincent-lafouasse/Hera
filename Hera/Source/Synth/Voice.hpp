@@ -8,7 +8,7 @@ class SynthSound final : juce::SynthesiserSound {
     ~SynthSound() override = default;
 };
 
-class SineVoice final : public juce::SynthesiserVoice {
+class Voice final : public juce::SynthesiserVoice {
    public:
     void renderNextBlock(AudioBuffer<float>& outputBuffer,
                          int startSample,
