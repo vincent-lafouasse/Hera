@@ -2,6 +2,12 @@
 
 #include "JuceHeader.h"
 
+class SynthSound final : juce::SynthesiserSound {
+    bool appliesToNote(int) override { return true; }
+    bool appliesToChannel(int) override { return true; }
+    ~SynthSound() override = default;
+};
+
 class SineVoice final : public juce::SynthesiserVoice {
    public:
     void renderNextBlock(AudioBuffer<float>& outputBuffer,

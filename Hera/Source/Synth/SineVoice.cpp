@@ -1,7 +1,5 @@
 #include "SineVoice.hpp"
 
-#include "SineSound.hpp"
-
 namespace {
 template <typename NumericType>
 void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
@@ -94,5 +92,5 @@ void SineVoice::controllerMoved(const int controllerNumber,
 }
 
 bool SineVoice::canPlaySound(juce::SynthesiserSound* sound) {
-    return dynamic_cast<SineSound*>(sound) != nullptr;
+    return dynamic_cast<SynthSound*>(sound) != nullptr;
 }

@@ -27,7 +27,6 @@ target_sources(${TargetName} PRIVATE
 		Source/Synth/SynthAudioSource.hpp
 		Source/Synth/SineVoice.cpp
 		Source/Synth/SineVoice.hpp
-		Source/Synth/SineSound.hpp
 
 		Source/Gui/Editor.cpp
 		Source/Gui/Editor.hpp
