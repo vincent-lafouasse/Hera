@@ -2,8 +2,8 @@
 
 #include <JuceHeader.h>
 
-class SineVoice final : juce::SynthesiserSound {
+class SineSound final : juce::SynthesiserSound {
     bool appliesToNote(int) override { return true; }
     bool appliesToChannel(int) override { return true; }
-    ~SineVoice() = default;
+    ~SineSound() = default;
 };
