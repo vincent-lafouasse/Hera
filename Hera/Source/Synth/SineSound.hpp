@@ -5,5 +5,5 @@
 class SineSound final : juce::SynthesiserSound {
     bool appliesToNote(int) override { return true; }
     bool appliesToChannel(int) override { return true; }
-    ~SineSound() = default;
+    ~SineSound() override = default;
 };
