@@ -57,6 +57,8 @@ void SineVoice::startNote(const int midiNote,
                           const float velocity,
                           juce::SynthesiserSound* sound,
                           const int /*pitchWheelPosition*/) {
+    (void)sound;
+
     this->phase = 0.0f;
     this->level = 0.15 * velocity;
     this->tailOff = 0.0;
@@ -67,7 +69,10 @@ void SineVoice::startNote(const int midiNote,
         frequency * juce::MathConstants<float>::twoPi / getSampleRate();
 }
 
-void SineVoice::stopNote(const float velocity, const bool allowTailOff) {}
+void SineVoice::stopNote(const float velocity, const bool allowTailOff) {
+    (void)velocity;
+    (void)allowTailOff;
+}
 
 void SineVoice::pitchWheelMoved(const int newPitchWheelValue) {
     (void)newPitchWheelValue;
