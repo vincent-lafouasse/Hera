@@ -7,8 +7,6 @@ namespace {
 constexpr float aspectRatio = 6.4;
 constexpr int screenWidth = 1000;
 constexpr int screenHeight = static_cast<int>(screenWidth / aspectRatio);
-
-constexpr float keyboardWidth = 0.85f;
 }  // namespace
 
 //==============================================================================
@@ -56,6 +54,7 @@ void HeraEditor::setupGainKnob() {
 }
 
 void HeraEditor::resized() {
+    constexpr float keyboardWidth = 0.85f;
     constexpr float volumeKnobSize = 1.0 - keyboardWidth;
 
     volume_knob.setBoundsRelative(0.0, 0.0, volumeKnobSize, 1.0);
