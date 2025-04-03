@@ -7,6 +7,7 @@
 */
 
 #include "Processor.hpp"
+#include "Editor.hpp"
 #include "Synth/SynthAudioSource.hpp"
 
 #include <cassert>
@@ -166,7 +167,7 @@ bool HeraProcessor::hasEditor() const {
 }
 
 juce::AudioProcessorEditor* HeraProcessor::createEditor() {
-    return new juce::GenericAudioProcessorEditor(*this);
+    return new HeraEditor(*this);
 }
 
 //==============================================================================
