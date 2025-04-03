@@ -6,16 +6,13 @@
 namespace {
 constexpr int windowWidth = 1600;
 constexpr int windowHeight = 400;
-
-constexpr int volumeKnobSize = 100;
-
-constexpr int margin = 15;
 }  // namespace
 
 //==============================================================================
 HeraEditor::HeraEditor(HeraProcessor& p)
     : AudioProcessorEditor(&p),
       audioProcessor(p),
+      volume_label("VolumeLabel", "Volume"),
       keyboardComponent(p.keyboardState,
                         KeyboardComponentBase::horizontalKeyboard) {
     setSize(windowWidth, windowHeight);
@@ -26,7 +23,9 @@ HeraEditor::HeraEditor(HeraProcessor& p)
 
 HeraEditor::~HeraEditor() = default;
 
-void HeraEditor::setupKeyboard() {}
+void HeraEditor::setupKeyboard() {
+    addAndMakeVisible (keyboardComponent);
+}
 
 void HeraEditor::setupGainKnob() {
     this->volume_attachment =
@@ -46,12 +45,22 @@ void HeraEditor::setupGainKnob() {
 
     addAndMakeVisible(volume_label);
     volume_label.setText("Volume", juce::dontSendNotification);
+    volume_label.setColour (juce::Label::textColourId, juce::Colours::lightgreen);
+    volume_label.setJustificationType (juce::Justification::centred);
+
+
     volume_label.attachToComponent(&volume_knob, true);
 }
 
 void HeraEditor::resized() {
-    volume_knob.setBounds(margin, (windowHeight - volumeKnobSize) / 2,
-                          volumeKnobSize, volumeKnobSize);
+    constexpr float volumeKnobSize = 0.15;
+    constexpr float margin = 0.05f;
+    volume_knob.setBoundsRelative(margin, 0.5 * (1.0 - volumeKnobSize),
+                                  volumeKnobSize, volumeKnobSize);
+
+    constexpr float keyboardWidth = 1.0 - 3.0 * margin - volumeKnobSize;
+    keyboardComponent.setBoundsRelative(2.0 * margin + volumeKnobSize, margin,
+                                        keyboardWidth, 1.0 - 2.0 * margin);
 }
 
 juce::String VolumeKnob::getTextFromValue(const double value) {
