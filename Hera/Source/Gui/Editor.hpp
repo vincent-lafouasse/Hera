@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Processor.hpp"
+#include "JuceHeader.h"
 
 //==============================================================================
 
