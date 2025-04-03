@@ -7,7 +7,7 @@
 */
 
 #include "Processor.hpp"
-#include "Synth/SineVoice.hpp"
+#include "Synth/SynthAudioSource.hpp"
 
 #include <cassert>
 
