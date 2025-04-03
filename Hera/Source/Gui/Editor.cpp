@@ -4,8 +4,11 @@
 #include "Processor.hpp"
 
 namespace {
-constexpr int windowWidth = 1600;
-constexpr int windowHeight = 400;
+constexpr float aspectRatio = 6.4;
+constexpr int screenWidth = 1000;
+constexpr int screenHeight = static_cast<int>(screenWidth / aspectRatio);
+
+constexpr float keyboardWidth = 0.85f;
 }  // namespace
 
 //==============================================================================
@@ -15,7 +18,7 @@ HeraEditor::HeraEditor(HeraProcessor& p)
       volume_label("VolumeLabel", "Volume"),
       keyboardComponent(p.keyboardState,
                         KeyboardComponentBase::horizontalKeyboard) {
-    setSize(windowWidth, windowHeight);
+    setSize(screenWidth, screenHeight);
 
     this->setupKeyboard();
     this->setupGainKnob();
@@ -24,7 +27,7 @@ HeraEditor::HeraEditor(HeraProcessor& p)
 HeraEditor::~HeraEditor() = default;
 
 void HeraEditor::setupKeyboard() {
-    addAndMakeVisible (keyboardComponent);
+    addAndMakeVisible(keyboardComponent);
 }
 
 void HeraEditor::setupGainKnob() {
@@ -45,22 +48,20 @@ void HeraEditor::setupGainKnob() {
 
     addAndMakeVisible(volume_label);
     volume_label.setText("Volume", juce::dontSendNotification);
-    volume_label.setColour (juce::Label::textColourId, juce::Colours::lightgreen);
-    volume_label.setJustificationType (juce::Justification::centred);
-
+    volume_label.setColour(juce::Label::textColourId,
+                           juce::Colours::lightgreen);
+    volume_label.setJustificationType(juce::Justification::centred);
 
     volume_label.attachToComponent(&volume_knob, true);
 }
 
 void HeraEditor::resized() {
-    constexpr float volumeKnobSize = 0.15;
-    constexpr float margin = 0.05f;
-    volume_knob.setBoundsRelative(margin, 0.5 * (1.0 - volumeKnobSize),
-                                  volumeKnobSize, volumeKnobSize);
+    constexpr float volumeKnobSize = 1.0 - keyboardWidth;
 
-    constexpr float keyboardWidth = 1.0 - 3.0 * margin - volumeKnobSize;
-    keyboardComponent.setBoundsRelative(2.0 * margin + volumeKnobSize, margin,
-                                        keyboardWidth, 1.0 - 2.0 * margin);
+    volume_knob.setBoundsRelative(0.0, 0.0, volumeKnobSize, 1.0);
+
+    keyboardComponent.setBoundsRelative(volumeKnobSize, 0.0, keyboardWidth,
+                                        1.0);
 }
 
 juce::String VolumeKnob::getTextFromValue(const double value) {
