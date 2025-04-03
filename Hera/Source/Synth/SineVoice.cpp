@@ -22,8 +22,13 @@ void SineVoice::startNote(int midiNote,
 
 void SineVoice::stopNote(float velocity, bool allowTailOff) {}
 
-void SineVoice::pitchWheelMoved(int newPitchWheelValue) {}
-void SineVoice::controllerMoved(int controllerNumber, int newControllerValue) {}
+void SineVoice::pitchWheelMoved(int newPitchWheelValue) {
+    (void)newPitchWheelValue;
+}
+void SineVoice::controllerMoved(int controllerNumber, int newControllerValue) {
+    (void)controllerNumber;
+    (void)newControllerValue;
+}
 
 bool SineVoice::canPlaySound(juce::SynthesiserSound* sound) {
     return dynamic_cast<SineSound*>(sound) != nullptr;
