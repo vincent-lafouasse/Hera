@@ -11,8 +11,8 @@ void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
 }  // namespace
 
 void Voice::renderNextBlock(AudioBuffer<float>& outputBuffer,
-                                const int startSample,
-                                const int numSamples) {
+                            const int startSample,
+                            const int numSamples) {
     if (this->phaseIncrement == 0.0)
         return;
 
@@ -54,9 +54,9 @@ void Voice::renderNextBlock(AudioBuffer<float>& outputBuffer,
 }
 
 void Voice::startNote(const int midiNote,
-                          const float velocity,
-                          juce::SynthesiserSound* sound,
-                          const int /*pitchWheelPosition*/) {
+                      const float velocity,
+                      juce::SynthesiserSound* sound,
+                      const int /*pitchWheelPosition*/) {
     (void)sound;
 
     this->phase = 0.0f;
@@ -86,7 +86,7 @@ void Voice::pitchWheelMoved(const int newPitchWheelValue) {
     (void)newPitchWheelValue;
 }
 void Voice::controllerMoved(const int controllerNumber,
-                                int const newControllerValue) {
+                            int const newControllerValue) {
     (void)controllerNumber;
     (void)newControllerValue;
 }
