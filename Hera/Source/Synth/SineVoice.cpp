@@ -1,5 +1,7 @@
 #include "SineVoice.hpp"
 
+#include "SineSound.hpp"
+
 void SineVoice::renderNextBlock(AudioBuffer<float>& outputBuffer,
                                 int startSample,
                                 int numSamples) {}

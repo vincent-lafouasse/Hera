@@ -1,7 +1,6 @@
 #pragma once
 
 #include "JuceHeader.h"
-#include "SineSound.hpp"
 
 class SineVoice final : public juce::SynthesiserVoice {
     void renderNextBlock(AudioBuffer<float>& outputBuffer,
