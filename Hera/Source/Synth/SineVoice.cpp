@@ -22,16 +22,34 @@ void SineVoice::renderNextBlock(AudioBuffer<float>& outputBuffer,
 
     if (this->tailOff != 0.0) {
         // decaying
-        return;
-    }
+        for (int i = 0; i < numSamples; i++) {
+            const float sine =
+                this->tailOff * this->level * std::sin(this->phase);
+            wrapping_add(this->phase, this->phaseIncrement,
+                         juce::MathConstants<double>::twoPi);
 
-    for (int i = 0; i < numSamples; i++) {
-        const float sine = this->level * std::sin(this->phase);
-        wrapping_add(this->phase, this->phaseIncrement,
-                     juce::MathConstants<double>::twoPi);
+            for (auto channel{}; channel < nChannels; ++channel) {
+                outputBuffer.addSample(channel, startSample + i, sine);
+            }
 
-        for (auto channel{}; channel < nChannels; ++channel) {
-            outputBuffer.addSample(channel, startSample + i, sine);
+            this->tailOff *= 0.99;  // exponential decay
+
+            if (this->tailOff < 0.05) {
+                this->clearCurrentNote();
+                this->phaseIncrement = 0.0;
+                return;
+            }
+        }
+    } else {
+        // regular buffer
+        for (int i = 0; i < numSamples; i++) {
+            const float sine = this->level * std::sin(this->phase);
+            wrapping_add(this->phase, this->phaseIncrement,
+                         juce::MathConstants<double>::twoPi);
+
+            for (auto channel{}; channel < nChannels; ++channel) {
+                outputBuffer.addSample(channel, startSample + i, sine);
+            }
         }
     }
 }
