@@ -66,7 +66,7 @@ void SineVoice::startNote(const int midiNote,
     this->tailOff = 0.0;
 
     const double frequency =
-        440.0 * powf(2.0, static_cast<float>(midiNote - 69) / 12.0);
+        440.0 * powf(2.0, static_cast<float>(midiNote - 69) / 12.0f);
     this->phaseIncrement =
         frequency * juce::MathConstants<float>::twoPi / getSampleRate();
 }
