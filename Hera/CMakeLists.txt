@@ -21,10 +21,7 @@ juce_generate_juce_header(${TargetName})
 target_sources(${TargetName} PRIVATE
         Source/Processor.cpp
         Source/Processor.hpp
-        Source/Editor.cpp
-        Source/Editor.hpp
         Source/Integrator.hpp
-        Source/Parameters.h
 )
 
 target_compile_definitions(${TargetName}

@@ -166,7 +166,7 @@ bool HeraProcessor::hasEditor() const {
 }
 
 juce::AudioProcessorEditor* HeraProcessor::createEditor() {
-    return new HeraEditor(*this);
+    return new juce::GenericAudioProcessorEditor(*this);
 }
 
 //==============================================================================
