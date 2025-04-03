@@ -5,7 +5,10 @@
 
 //==============================================================================
 HeraEditor::HeraEditor(HeraProcessor& p)
-    : AudioProcessorEditor(&p), audioProcessor(p) {
+    : AudioProcessorEditor(&p),
+      audioProcessor(p),
+      keyboardComponent(p.keyboardState,
+                        KeyboardComponentBase::horizontalKeyboard) {
     constexpr int width = 200;
     constexpr int height = 400;
     setSize(width, height);

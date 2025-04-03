@@ -31,6 +31,8 @@ class HeraEditor final : public juce::AudioProcessorEditor {
     VolumeKnob volume_knob;
     juce::Label volume_label;
 
+    juce::MidiKeyboardComponent keyboardComponent;
+
    public:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment>
         volume_attachment;
