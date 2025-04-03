@@ -7,7 +7,6 @@
 */
 
 #include "Processor.hpp"
-#include "Editor.hpp"
 
 #include <cassert>
 
