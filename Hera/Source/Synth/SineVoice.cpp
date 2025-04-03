@@ -23,8 +23,7 @@ void SineVoice::renderNextBlock(AudioBuffer<float>& outputBuffer,
     if (this->tailOff != 0.0) {
         // decaying
         for (int i = 0; i < numSamples; i++) {
-            const float sine =
-                this->tailOff * this->level * std::sin(this->phase);
+            const float sine = static_cast<float>(this->tailOff * this->level * std::sin(this->phase));
             wrapping_add(this->phase, this->phaseIncrement,
                          juce::MathConstants<double>::twoPi);
 
@@ -43,7 +42,7 @@ void SineVoice::renderNextBlock(AudioBuffer<float>& outputBuffer,
     } else {
         // regular buffer
         for (int i = 0; i < numSamples; i++) {
-            const float sine = this->level * std::sin(this->phase);
+            const float sine = static_cast<float>(this->level * std::sin(this->phase));
             wrapping_add(this->phase, this->phaseIncrement,
                          juce::MathConstants<double>::twoPi);
 
