@@ -24,6 +24,7 @@ class HeraEditor final : public juce::AudioProcessorEditor {
 
    private:
     void setupGainKnob();
+    void setupKeyboard();
 
    private:
     HeraProcessor& audioProcessor;

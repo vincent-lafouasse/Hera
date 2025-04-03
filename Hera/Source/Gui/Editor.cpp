@@ -13,10 +13,13 @@ HeraEditor::HeraEditor(HeraProcessor& p)
     constexpr int height = 400;
     setSize(width, height);
 
+    this->setupKeyboard();
     this->setupGainKnob();
 }
 
 HeraEditor::~HeraEditor() = default;
+
+void HeraEditor::setupKeyboard() {}
 
 void HeraEditor::setupGainKnob() {
     this->volume_attachment =
