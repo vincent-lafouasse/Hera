@@ -27,7 +27,7 @@ void SineVoice::renderNextBlock(AudioBuffer<float>& outputBuffer,
             wrapping_add(this->phase, this->phaseIncrement,
                          juce::MathConstants<double>::twoPi);
 
-            for (auto channel{}; channel < nChannels; ++channel) {
+            for (auto channel = 0; channel < nChannels; ++channel) {
                 outputBuffer.addSample(channel, startSample + i, sine);
             }
 
@@ -46,7 +46,7 @@ void SineVoice::renderNextBlock(AudioBuffer<float>& outputBuffer,
             wrapping_add(this->phase, this->phaseIncrement,
                          juce::MathConstants<double>::twoPi);
 
-            for (auto channel{}; channel < nChannels; ++channel) {
+            for (auto channel = 0; channel < nChannels; ++channel) {
                 outputBuffer.addSample(channel, startSample + i, sine);
             }
         }
