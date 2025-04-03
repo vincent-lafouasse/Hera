@@ -26,6 +26,7 @@ HeraEditor::~HeraEditor() = default;
 
 void HeraEditor::setupKeyboard() {
     addAndMakeVisible(keyboardComponent);
+    keyboardComponent.setBlackNoteLengthProportion(0.6);
 }
 
 void HeraEditor::setupGainKnob() {
