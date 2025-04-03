@@ -23,6 +23,7 @@ target_sources(${TargetName} PRIVATE
         Source/Processor.hpp
         Source/Integrator.hpp
 		Source/Synth/SineSound.hpp
+		Source/Synth/SineVoice.hpp
 )
 
 target_compile_definitions(${TargetName}
