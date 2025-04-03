@@ -73,7 +73,15 @@ void SineVoice::startNote(const int midiNote,
 
 void SineVoice::stopNote(const float velocity, const bool allowTailOff) {
     (void)velocity;
-    (void)allowTailOff;
+
+    if (allowTailOff) {
+        if (this->tailOff == 0.0) {
+            this->tailOff = 1.0;
+        }
+    } else {
+        this->clearCurrentNote();
+        this->phaseIncrement = 0.0;
+    }
 }
 
 void SineVoice::pitchWheelMoved(const int newPitchWheelValue) {
