@@ -10,6 +10,13 @@ void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
 }
 }  // namespace
 
+Voice::Voice(): sampleRate(48000) {}
+
+void Voice::setCurrentPlaybackSampleRate(double newRate) {
+    this->sampleRate = newRate;
+}
+
+
 void Voice::renderNextBlock(AudioBuffer<float>& outputBuffer,
                             const int startSample,
                             const int numSamples) {
@@ -67,7 +74,7 @@ void Voice::startNote(const int midiNote,
     const double frequency =
         juce::MidiMessage::getMidiNoteInHertz(midiNote - 5 * 12);
     this->phaseIncrement =
-        frequency * juce::MathConstants<float>::twoPi / getSampleRate();
+        frequency * juce::MathConstants<float>::twoPi / this->sampleRate;
 }
 
 void Voice::stopNote(const float velocity, const bool allowTailOff) {
