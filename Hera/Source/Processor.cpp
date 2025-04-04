@@ -12,16 +12,6 @@
 
 #include <cassert>
 
-namespace {
-template <typename NumericType>
-void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
-    value += addend;
-    while (value >= limit) {
-        value -= limit;
-    }
-}
-}  // namespace
-
 const std::string HeraProcessor::volume_id = "volume";
 const std::string HeraProcessor::volume_name = "Volume";
 
