@@ -8,6 +8,10 @@ constexpr float aspectRatio = 6.4;
 constexpr int screenWidth = 1000;
 constexpr int screenHeight = static_cast<int>(screenWidth / aspectRatio);
 
+constexpr int c0 = 12;
+constexpr int lowestNote = c0 + 2 * 12;
+constexpr int highestNote = c0 + 7 * 12;
+// 5 octaves, C to C
 constexpr int numWhiteKeys = 36;
 constexpr int keyWidth = 23;
 constexpr int keyboardWidth = numWhiteKeys * keyWidth;
@@ -32,9 +36,6 @@ void HeraEditor::setupKeyboard() {
     addAndMakeVisible(keyboardComponent);
     keyboardComponent.setBlackNoteLengthProportion(0.6);
 
-    constexpr int c0 = 12;
-    constexpr int lowestNote = c0 + 2 * 12;
-    constexpr int highestNote = c0 + 7 * 12;
     keyboardComponent.setAvailableRange(lowestNote, highestNote);
     keyboardComponent.setKeyWidth(keyWidth);
 }
