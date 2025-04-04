@@ -69,9 +69,7 @@ void Voice::startNote(const int midiNote,
     this->level = 0.15 * velocity;
     this->tailOff = 0.0;
 
-    // sound is shrill for some reason, so I added this offset down
-    const double frequency =
-        juce::MidiMessage::getMidiNoteInHertz(midiNote - 5 * 12);
+    const double frequency = juce::MidiMessage::getMidiNoteInHertz(midiNote);
     this->phaseIncrement =
         frequency * juce::MathConstants<float>::twoPi / this->sampleRate;
 }
