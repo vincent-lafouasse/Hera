@@ -49,6 +49,21 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
                                  juce::MidiBuffer& midiBuffer) {
     this->synthSource.getNextAudioBlock(
         juce::AudioSourceChannelInfo(&buffer, 0, buffer.getNumSamples()));
+
+    const auto numSamples = buffer.getNumSamples();
+    auto* leftChannel = buffer.getWritePointer(0);
+    auto* rightChannel = buffer.getWritePointer(0);
+
+    const float targetVolume = this->params.getRawParameterValue(volume_id)->load(std::memory_order_relaxed);
+
+    for (auto i = 0; i < numSamples; ++i) {
+        leftChannel[i] *= this->masterVolume;
+        rightChannel[i] *= this->masterVolume;
+
+        if (!juce::approximatelyEqual(targetVolume, this->masterVolume)) {
+            this->masterVolume = 0.5 * (targetVolume + this->masterVolume);
+        }
+    }
 }
 
 void HeraProcessor::prepareToPlay(const double sampleRate,

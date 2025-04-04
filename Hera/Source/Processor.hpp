@@ -59,6 +59,7 @@ class HeraProcessor final : public juce::AudioProcessor
 
    private:
     SynthAudioSource synthSource;
+    float masterVolume{};
 
    public:
     static const std::string volume_id;
