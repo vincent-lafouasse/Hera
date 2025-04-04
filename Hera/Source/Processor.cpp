@@ -48,60 +48,26 @@ HeraProcessor::HeraProcessor()
       params(*this,
              nullptr,
              "PARAMETERS",
-             HeraProcessor::createParameterLayout()) {
+             HeraProcessor::createParameterLayout()),
+      synthSource(this->keyboardState) {
     assert(std::atomic<float>::is_always_lock_free);
 }
 
 HeraProcessor::~HeraProcessor() = default;
 
 void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
-                                 juce::MidiBuffer&) {
-    auto* left_channel = buffer.getWritePointer(0);
-    auto* right_channel = buffer.getWritePointer(1);
-    const auto bufferSize = buffer.getNumSamples();
-
-    const float target_volume =
-        this->params.getRawParameterValue(HeraProcessor::volume_id)
-            ->load(std::memory_order_relaxed);
-
-    for (auto i = 0; i < bufferSize; ++i) {
-        constexpr float sine_volume = 0.5f;
-        const float sine = sine_volume * std::sin(this->phase);
-        wrapping_add(this->phase, this->phase_increment,
-                     juce::MathConstants<float>::twoPi);
-
-        if (!juce::approximatelyEqual(this->volume, target_volume)) {
-            this->volume = 0.5f * (target_volume + this->volume);
-        }
-
-        left_channel[i] = this->volume * sine;
-        right_channel[i] = this->volume * sine;
-    }
+                                 juce::MidiBuffer& midiBuffer) {
+    this->synthSource.getNextAudioBlock(
+        juce::AudioSourceChannelInfo(&buffer, 0, buffer.getNumSamples()));
 }
-
-// period T = 1/f  <-> sample len delta_t = 1/sample_rate
-// 2pi             <-> phase_increment = 2pi f / sample_rate
 
 void HeraProcessor::prepareToPlay(const double sampleRate,
                                   const int samplesPerBlock) {
-    this->sample_rate = static_cast<float>(sampleRate);
-    this->set_frequency(220.0f);
-
-    juce::String message;
-    message << "Preparing to play audio...\n";
-    message << " samplesPerBlockExpected = " << samplesPerBlock << "\n";
-    message << " sampleRate = " << sampleRate;
-    juce::Logger::writeToLog(message);
+    this->synthSource.prepareToPlay(sampleRate, samplesPerBlock);
 }
 
 void HeraProcessor::releaseResources() {
-    juce::Logger::writeToLog("Releasing audio resources");
-}
-
-void HeraProcessor::set_frequency(const float freq) {
-    this->frequency = freq;
-    this->phase_increment =
-        juce::MathConstants<float>::twoPi * this->frequency / this->sample_rate;
+    this->synthSource.releaseResources();
 }
 
 //================== boiler plate =============================================

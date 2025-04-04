@@ -2,6 +2,7 @@
 
 #include "Integrator.hpp"
 #include "JuceHeader.h"
+#include "Synth/AudioSource.hpp"
 
 //==============================================================================
 /**
@@ -59,13 +60,7 @@ class HeraProcessor final : public juce::AudioProcessor
     juce::MidiKeyboardState keyboardState{};
 
    private:
-    float volume{};
-
-    float frequency{};
-    float phase{};
-    float phase_increment{};
-
-    float sample_rate{};
+    SynthAudioSource synthSource;
 
    public:
     static const std::string volume_id;
