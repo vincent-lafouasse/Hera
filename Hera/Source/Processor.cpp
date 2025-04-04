@@ -63,7 +63,7 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
 
 void HeraProcessor::prepareToPlay(const double sampleRate,
                                   const int samplesPerBlock) {
-    this->synthSource.prepareToPlay(sampleRate, samplesPerBlock);
+    this->synthSource.prepareToPlay(samplesPerBlock, sampleRate);
 }
 
 void HeraProcessor::releaseResources() {
