@@ -51,8 +51,6 @@ class HeraProcessor final : public juce::AudioProcessor
     void setStateInformation(const void* data, int sizeInBytes) override;
     //==============================================================================
 
-    void set_frequency(float freq);
-
     static AudioProcessorValueTreeState::ParameterLayout
     createParameterLayout();
     juce::AudioProcessorValueTreeState params;
