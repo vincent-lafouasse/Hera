@@ -61,20 +61,15 @@ void HeraEditor::setupGainKnob() {
     volume_label.setColour(juce::Label::textColourId,
                            juce::Colours::lightgreen);
     volume_label.setJustificationType(juce::Justification::centred);
-
-    volume_label.attachToComponent(&volume_knob, true);
 }
 
 void HeraEditor::resized() {
     juce::Rectangle<int> area = getLocalBounds();
 
-    constexpr int componentHeight = static_cast<int>(screenHeight * 0.90);
-    constexpr int volumeSectionWidth = screenWidth - keyboardWidth;
-
-    volume_knob.setBounds(
-        area.removeFromLeft(volumeSectionWidth).removeFromTop(componentHeight));
-    keyboardComponent.setBounds(
-        area.removeFromLeft(keyboardWidth).removeFromTop(componentHeight));
+    auto volume_bounds = area.removeFromLeft(getHeight() * 0.9f);
+    volume_label.setBounds(volume_bounds.removeFromTop(24));
+    volume_knob.setBounds(volume_bounds);
+    keyboardComponent.setBounds(area);
 }
 
 juce::String VolumeKnob::getTextFromValue(const double value) {
