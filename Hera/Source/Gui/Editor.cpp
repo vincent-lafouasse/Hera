@@ -38,6 +38,7 @@ void HeraEditor::setupKeyboard() {
 
     keyboardComponent.setAvailableRange(lowestNote, highestNote);
     keyboardComponent.setKeyWidth(keyWidth);
+    keyboardComponent.setOctaveForMiddleC(4);
 }
 
 void HeraEditor::setupGainKnob() {
