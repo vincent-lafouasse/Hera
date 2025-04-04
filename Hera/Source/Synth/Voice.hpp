@@ -25,7 +25,6 @@ class Voice final : public juce::SynthesiserVoice {
 
     void setCurrentPlaybackSampleRate(double newRate) override;
 
-
     void pitchWheelMoved(int newPitchWheelValue) override;
     void controllerMoved(int controllerNumber, int newControllerValue) override;
 

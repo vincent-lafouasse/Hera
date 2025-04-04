@@ -10,12 +10,11 @@ void wrapping_add(NumericType& value, NumericType addend, NumericType limit) {
 }
 }  // namespace
 
-Voice::Voice(): sampleRate(48000) {}
+Voice::Voice() : sampleRate(48000) {}
 
 void Voice::setCurrentPlaybackSampleRate(double newRate) {
     this->sampleRate = newRate;
 }
-
 
 void Voice::renderNextBlock(AudioBuffer<float>& outputBuffer,
                             const int startSample,
