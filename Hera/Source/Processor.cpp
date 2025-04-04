@@ -52,7 +52,7 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
 
     const auto numSamples = buffer.getNumSamples();
     auto* leftChannel = buffer.getWritePointer(0);
-    auto* rightChannel = buffer.getWritePointer(0);
+    auto* rightChannel = buffer.getWritePointer(1);
 
     const float targetVolume = this->params.getRawParameterValue(volume_id)->load(std::memory_order_relaxed);
 
