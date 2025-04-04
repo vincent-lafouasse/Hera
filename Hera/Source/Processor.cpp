@@ -63,7 +63,7 @@ void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
         rightChannel[i] *= this->masterVolume;
 
         if (!juce::approximatelyEqual(targetVolume, this->masterVolume)) {
-            this->masterVolume = 0.5 * (targetVolume + this->masterVolume);
+            this->masterVolume = 0.5f * (targetVolume + this->masterVolume);
         }
     }
 }
