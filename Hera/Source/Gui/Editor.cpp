@@ -28,9 +28,10 @@ void HeraEditor::setupKeyboard() {
     addAndMakeVisible(keyboardComponent);
     keyboardComponent.setBlackNoteLengthProportion(0.6);
 
-    constexpr int c1 = 24;
-    constexpr int c6 = 84;
-    keyboardComponent.setAvailableRange(c1, c6);
+    constexpr int c0 = 12;
+    constexpr int lowestNote = c0 + 2 * 12;
+    constexpr int highestNote = c0 + 7 * 12;
+    keyboardComponent.setAvailableRange(lowestNote, highestNote);
     keyboardComponent.setKeyWidth(23);
 }
 
