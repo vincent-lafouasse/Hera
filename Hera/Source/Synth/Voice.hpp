@@ -3,7 +3,7 @@
 #include "JuceHeader.h"
 
 class SynthSound final : public juce::SynthesiserSound {
-public:
+   public:
     SynthSound() = default;
     bool appliesToNote(int) override { return true; }
     bool appliesToChannel(int) override { return true; }

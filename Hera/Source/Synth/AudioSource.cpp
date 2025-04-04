@@ -24,5 +24,6 @@ void SynthAudioSource::getNextAudioBlock(
     juce::MidiBuffer incomingMidi;
     keyboardState.processNextMidiBuffer(incomingMidi, bufferToFill.startSample,
                                         bufferToFill.numSamples, true);
-    synth.renderNextBlock(*bufferToFill.buffer, incomingMidi, bufferToFill.startSample, bufferToFill.numSamples);
+    synth.renderNextBlock(*bufferToFill.buffer, incomingMidi,
+                          bufferToFill.startSample, bufferToFill.numSamples);
 }
