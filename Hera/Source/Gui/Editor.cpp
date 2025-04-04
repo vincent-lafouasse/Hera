@@ -7,6 +7,10 @@ namespace {
 constexpr float aspectRatio = 6.4;
 constexpr int screenWidth = 1000;
 constexpr int screenHeight = static_cast<int>(screenWidth / aspectRatio);
+
+constexpr int numWhiteKeys = 36;
+constexpr int keyWidth = 23;
+constexpr int keyboardWidth = numWhiteKeys * keyWidth;
 }  // namespace
 
 //==============================================================================
@@ -32,7 +36,7 @@ void HeraEditor::setupKeyboard() {
     constexpr int lowestNote = c0 + 2 * 12;
     constexpr int highestNote = c0 + 7 * 12;
     keyboardComponent.setAvailableRange(lowestNote, highestNote);
-    keyboardComponent.setKeyWidth(23);
+    keyboardComponent.setKeyWidth(keyWidth);
 }
 
 void HeraEditor::setupGainKnob() {
@@ -64,13 +68,12 @@ void HeraEditor::resized() {
     juce::Rectangle<int> area = getLocalBounds();
 
     constexpr int componentHeight = static_cast<int>(screenHeight * 0.90);
-    constexpr int keyboardSectionWidth = 828;
-    constexpr int volumeSectionWidth = screenWidth - keyboardSectionWidth;
+    constexpr int volumeSectionWidth = screenWidth - keyboardWidth;
 
     volume_knob.setBounds(
         area.removeFromLeft(volumeSectionWidth).removeFromTop(componentHeight));
-    keyboardComponent.setBounds(area.removeFromLeft(keyboardSectionWidth)
-                                    .removeFromTop(componentHeight));
+    keyboardComponent.setBounds(
+        area.removeFromLeft(keyboardWidth).removeFromTop(componentHeight));
 }
 
 juce::String VolumeKnob::getTextFromValue(const double value) {
