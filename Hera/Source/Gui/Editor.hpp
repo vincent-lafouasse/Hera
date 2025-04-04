@@ -13,7 +13,7 @@ class VolumeKnob final : public juce::Slider {
 //==============================================================================
 /**
  */
-class HeraEditor final : public juce::AudioProcessorEditor {
+class HeraEditor final : public juce::AudioProcessorEditor, public juce::Timer {
    public:
     explicit HeraEditor(HeraProcessor&);
     ~HeraEditor() override;
@@ -21,6 +21,8 @@ class HeraEditor final : public juce::AudioProcessorEditor {
     //==============================================================================
     void paint(juce::Graphics&) override;
     void resized() override;
+
+    void timerCallback() override;
 
    private:
     void setupGainKnob();

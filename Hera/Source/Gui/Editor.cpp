@@ -28,6 +28,7 @@ HeraEditor::HeraEditor(HeraProcessor& p)
 
     this->setupKeyboard();
     this->setupGainKnob();
+    this->startTimer(400);
 }
 
 HeraEditor::~HeraEditor() = default;
@@ -82,6 +83,11 @@ juce::String VolumeKnob::getTextFromValue(const double value) {
     ss << std::setprecision(1);
     ss << 10.0 * value;
     return ss.str();
+}
+
+void HeraEditor::timerCallback() {
+    this->keyboardComponent.grabKeyboardFocus();
+    this->stopTimer();
 }
 
 //==============================================================================
