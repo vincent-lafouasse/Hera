@@ -2,8 +2,9 @@
 
 SDKs
 
-target
+build
 build-ios
+!lib/juce/**/build
 
 cmake-build-debug
 cmake-build-release
