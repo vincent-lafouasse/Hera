@@ -4,7 +4,7 @@
 #include "Processor.hpp"
 
 namespace {
-constexpr float aspectRatio = 6.4;
+constexpr float aspectRatio = 6.4f;
 constexpr int screenWidth = 1000;
 constexpr int screenHeight = static_cast<int>(screenWidth / aspectRatio);
 
@@ -35,7 +35,7 @@ HeraEditor::~HeraEditor() = default;
 
 void HeraEditor::setupKeyboard() {
     addAndMakeVisible(keyboardComponent);
-    keyboardComponent.setBlackNoteLengthProportion(0.6);
+    keyboardComponent.setBlackNoteLengthProportion(0.6f);
 
     keyboardComponent.setAvailableRange(lowestNote, highestNote);
     keyboardComponent.setKeyWidth(keyWidth);
