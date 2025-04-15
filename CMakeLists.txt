@@ -7,6 +7,7 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic")
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
 include(cmake/platform.cmake)
+include(cmake/fetch_gtest.cmake)
 
 add_subdirectory(lib/juce)
 add_subdirectory(Hera)
