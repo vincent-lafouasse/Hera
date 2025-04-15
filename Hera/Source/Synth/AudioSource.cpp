@@ -11,7 +11,7 @@ SynthAudioSource::SynthAudioSource(juce::MidiKeyboardState& keyboard_state)
     synth.addSound(new SynthSound());
 }
 
-void SynthAudioSource::prepareToPlay(int samplesPerBlockExpected,
+void SynthAudioSource::prepareToPlay(int /*samplesPerBlockExpected*/,
                                      double sampleRate) {
     synth.setCurrentPlaybackSampleRate(sampleRate);
 }

@@ -46,7 +46,7 @@ HeraProcessor::HeraProcessor()
 HeraProcessor::~HeraProcessor() = default;
 
 void HeraProcessor::processBlock(juce::AudioBuffer<float>& buffer,
-                                 juce::MidiBuffer& midiBuffer) {
+                                 juce::MidiBuffer& /*midiBuffer*/) {
     this->synthSource.getNextAudioBlock(
         juce::AudioSourceChannelInfo(&buffer, 0, buffer.getNumSamples()));
 
