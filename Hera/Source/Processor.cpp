@@ -40,7 +40,7 @@ HeraProcessor::HeraProcessor()
              "PARAMETERS",
              HeraProcessor::createParameterLayout()),
       synthSource(this->keyboardState) {
-    assert(std::atomic<float>::is_always_lock_free);
+    static_assert(std::atomic<float>::is_always_lock_free);
 }
 
 HeraProcessor::~HeraProcessor() = default;
