@@ -8,6 +8,7 @@ public:
 
    virtual float getNextSample();
    virtual void resetPhase();
+   virtual void setFrequency();
 };
 
 class Wavetable {
