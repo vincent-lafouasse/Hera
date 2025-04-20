@@ -1,5 +1,6 @@
 #pragma once
 
+
 class Oscillator {
 public:
    virtual ~Oscillator();
@@ -9,6 +10,10 @@ public:
    virtual float getNextSample();
    virtual void resetPhase();
    virtual void setFrequency();
+
+private:
+   float phase;
+   float phaseIncrement;
 };
 
 class Wavetable {
