@@ -11,8 +11,8 @@ juce_add_plugin("${TargetName}"
         IS_MIDI_EFFECT FALSE
         EDITOR_WANTS_KEYBOARD_FOCUS FALSE
         COPY_PLUGIN_AFTER_BUILD TRUE
-        PLUGIN_MANUFACTURER_CODE Juce
-        PLUGIN_CODE MIpl
+        PLUGIN_MANUFACTURER_CODE Poss
+        PLUGIN_CODE Hera
         FORMATS AU VST3 Standalone
         PRODUCT_NAME "${TargetName}"
 )
